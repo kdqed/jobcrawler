@@ -9,6 +9,7 @@ dependencies = [
     "extruct>=0.18.0",
     "html5lib>=1.1",
     "idli>=0.2.2",
+    "markitdown[pdf]>=0.1.5",
     "niquests>=3.17.0",
     "numpy>=2.4.2",
     "python-dotenv>=1.2.1",
