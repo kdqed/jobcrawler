@@ -1,0 +1,21 @@
+[project]
+name = "jobcrawler"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "beautifulsoup4>=4.14.3",
+    "extruct>=0.18.0",
+    "html5lib>=1.1",
+    "idli>=0.2.2",
+    "niquests>=3.17.0",
+    "numpy>=2.4.2",
+    "python-dotenv>=1.2.1",
+    "sentence-transformers>=5.2.3",
+]
+
+[dependency-groups]
+dev = [
+    "python-lsp-server>=1.14.0",
+]
