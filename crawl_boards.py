@@ -35,7 +35,6 @@ while True:
         board.redirect_url = response.url
         logging.info(f'Redirected to {response.url}')
         
-    break
     board.last_crawled = datetime.now()
     board.save()
     time.sleep(1)

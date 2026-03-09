@@ -102,4 +102,3 @@ class Job:
 if __name__ == '__main__':
     board = Board(url='https://jobs.lever.co/welocalize')
     board.save()
-

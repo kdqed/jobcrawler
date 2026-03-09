@@ -16,14 +16,14 @@ args = parser.parse_args()
 
 text = ''
 if args.text:
-  text = args.text
+    text = args.text
 elif args.filepath:
-  md = MarkItDown(enable_plugins=True)
-  text = md.convert(args.filepath).text_content
+    md = MarkItDown(enable_plugins=True)
+    text = md.convert(args.filepath).text_content
   
 
 text_vector = ml_utils.vectorize(text)
 
-jobs = Job.select().order_by(VNN.cos('match_vec', text_vector))[:10]
+jobs = Job.select().order_by(VNN.cos('match_vec', text_vector))[:25]
 for job in jobs:
     print(job.title, job.url)

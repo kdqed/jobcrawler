@@ -22,7 +22,14 @@ logging.basicConfig(
 
 
 while True:
-    job_url = JobUrl.select(crawled_at=None).order_by('discovered_at').one()
+    job_url = JobUrl.select(
+        crawled_at = None, 
+        src = sys.argv[1]
+    ).order_by('discovered_at').one()
+
+    if not job_url:
+        logging.info('Nothing to crawl, sleeping')
+        time.sleep(3600)
     logging.info(f'Crawling {job_url.url}')
 
     error = None
@@ -50,6 +57,3 @@ while True:
 
     job_url.crawled_at = datetime.now()
     job_url.save()
-    
-    
-    

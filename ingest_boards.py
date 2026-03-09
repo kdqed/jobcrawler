@@ -22,10 +22,12 @@ for url in urls:
     elif url.startswith("https://jobs.ashbyhq.com"):
         clean_url = '/'.join(url.split('/')[:4]).split("?")[0].lower()
         src = 'ashby'
+    elif url.startswith("https://jobs.gem.com"):
+        clean_url = '/'.join(url.split('/')[:4]).split("?")[0].lower()
+        src = 'gem'
 
     if clean_url and src:
         print(src, clean_url)
         Board.add(url=clean_url, src=src)
-
 
 print(f"{initial} -> {Board.count()}")
