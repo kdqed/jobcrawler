@@ -21,6 +21,10 @@ logging.basicConfig(
 
 while True:
     board = Board.select(src=sys.argv[1]).order_by('last_crawled').one()
+    since_last_crawl = datetime.now() - board.last_crawled
+    if since_last_crawl.days < 1:
+        time.sleep(3600)
+        continue
     
     logging.info(f'Crawling {board.url}')
     response = niquests.get(board.url, headers={'User-Agent': 'googlebot'})
