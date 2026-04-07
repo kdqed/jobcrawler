@@ -9,6 +9,8 @@ wheels/
 # Virtual environments
 .venv
 
+# Project Related
 workdir/
 .env
+google_oauth_client.json
 todo.md

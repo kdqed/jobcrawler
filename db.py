@@ -2,6 +2,7 @@ from datetime import datetime
 from uuid import UUID
 
 from idli import AutoUUID, BTreeIndex, Connection, HNSWIndex, Vector
+import jwt
 
 import config
 
@@ -99,6 +100,57 @@ class Job:
         job.save()
 
 
-if __name__ == '__main__':
-    board = Board(url='https://jobs.lever.co/welocalize')
-    board.save()
+@db.Model
+class ClientUser:
+    id: UUID = AutoUUID
+    name: str
+    email: str
+    client: str
+    
+    # match_vec: Vector(768) | None
+    # add separate table
+    
+    __idli__ = [
+        BTreeIndex('email', 'client')
+    ]
+    
+    
+    @classmethod
+    def add(cls, name: str, email: str, client: str):
+        exists = cls.select(email=email, client=client).one()
+        if exists:
+            return False
+        
+        user = cls(name=name, email=email, client=client)
+        user.save()
+        return True
+    
+        
+    @classmethod
+    def get_by_email(cls, email: str, client: str):
+        return cls.select(email=email, client=client).one()
+
+
+    @classmethod
+    def get_by_jwt(cls, encoded_jwt: str | None, iss: str):
+        if not encoded_jwt:
+            return None
+        try:
+            decoded_contents = jwt.decode(
+                encoded_jwt, config.JWT_SECRET, algorithms=["HS256"]
+            )
+            assert decoded_contents['iss'] == iss
+            email = decoded_contents['email']
+            return cls.select(email=email, client=iss).one()
+        except:
+            return None
+
+    
+    
+    def generate_jwt(self):
+        encoded_jwt = jwt.encode(
+            {'iss': self.client, 'email': self.email},
+            config.JWT_SECRET,
+            algorithm = 'HS256',
+        )
+        return encoded_jwt

@@ -1,0 +1,7 @@
+{% if request.user %}
+<h1>Hello {{request.user.name}}</h1>
+{% else %}
+<h1>Job Search for the AI age</h1>
+<p>Upload Resume -> See Matching Jobs -> Apply</p>
+<p><a href="/login" class="clk-solid">Login To Start</a></p>
+{% endif %}
