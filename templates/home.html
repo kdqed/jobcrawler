@@ -1,7 +1,33 @@
 {% if request.user %}
-<h1>Hello {{request.user.name}}</h1>
+  <h1>Hello {{request.user.name}}</h1>
+  {% if customized %}
+    <p>Here are some job postings suitable for your resume:</p>
+  {% else %}
+    <p>
+      💡We can create a customized job feed matching your resume!
+    </p>
+    <p>
+      <a href="/profile#resumeupload" class="clk-solid">
+        Upload Resume Now
+      </a>
+    </p>
+  {% endif %}
+  
+  {% for job in jobs %}
+    <section>
+      <a href="{{job.url}}" class="job-link-card" target="_blank">
+        <img src="{{job.org_logo}}" class="logo"/>
+        <div class="title"><b>{{job.title}}</b></div>
+        <div>
+          <em>👥 {{job.org_name}}</em>
+          <em>📍 {{job.loc_locality}}</em>
+          <em>🗓️ {{job.fmt_time_ago}}</em>
+        </div>
+      </a>
+    </section>
+  {% endfor %}
 {% else %}
-<h1>Job Search for the AI age</h1>
-<p>Upload Resume -> See Matching Jobs -> Apply</p>
-<p><a href="/login" class="clk-solid">Login To Start</a></p>
+  <h1>Job Search for the AI age</h1>
+  <p>Upload Resume -> See Matching Jobs -> Apply</p>
+  <p><a href="/login" class="clk-solid">Login To Start</a></p>
 {% endif %}

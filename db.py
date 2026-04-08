@@ -6,8 +6,30 @@ import jwt
 
 import config
 
-db = Connection(config.DB_URI, sambar_dip=True)
+db = Connection(config.DB_URI, sambar_dip=True, extensions=['pgvector'])
 
+
+def to_time_ago(dt: datetime | None):
+    if not dt:
+        return ''
+        
+    diff = datetime.now() - dt
+    seconds = int(diff.total_seconds())
+
+    if seconds < 60:
+        return f"{seconds} seconds ago"
+    
+    minutes = seconds // 60
+    if minutes < 60:
+        return f"{minutes} minutes ago"
+    
+    hours = minutes // 60
+    if hours < 24:
+        return f"{hours} hours ago"
+    
+    days = hours // 24
+    return f"{days} days ago"
+      
 
 @db.Model
 class Board:
@@ -77,6 +99,7 @@ class Job:
     
     __idli__ = [
         BTreeIndex('url'),
+        BTreeIndex('-date_posted'),
         HNSWIndex('match_vec', 'cos'),
     ]
 
@@ -98,6 +121,10 @@ class Job:
             setattr(job, key, details[key])
         
         job.save()
+    
+    @property
+    def fmt_time_ago(self):
+        return to_time_ago(self.date_posted)
 
 
 @db.Model
@@ -146,7 +173,6 @@ class ClientUser:
             return None
 
     
-    
     def generate_jwt(self):
         encoded_jwt = jwt.encode(
             {'iss': self.client, 'email': self.email},
@@ -154,3 +180,15 @@ class ClientUser:
             algorithm = 'HS256',
         )
         return encoded_jwt
+
+
+@db.Model
+class UserResume:
+    id: UUID
+    filename: str
+    match_vec: Vector(768)
+    updated: datetime
+    
+    @property
+    def updated_time_ago(self):
+        return to_time_ago(self.updated)

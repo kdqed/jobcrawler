@@ -1,0 +1,22 @@
+<h1>My Profile</h1>
+<p><b>Name:</b> {{request.user.name}}</p>
+<p><b>Email:</b> {{request.user.email}}</p>
+<p>
+  <b>Resume Last Updated:</b> 
+  {% if resume %} {{resume.updated_time_ago}} {% else %} Not Uploaded {% endif %}
+</p>
+
+<form method="POST" action="/upload-resume" enctype="multipart/form-data" id="resumeupload">
+  <h2>Resume Update</h2>
+  <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
+  <label>
+    <span>Select File:</span>
+    <input type="file" name="resume" accept=".pdf, .doc, .docx" required/>
+  </label>
+  <button type="submit" class="clk-solid">Upload</button>
+</form>
+
+<h2>Session</h2>
+<p>
+  <a href="/logout" class="clk-inline">Logout</a>
+</p>

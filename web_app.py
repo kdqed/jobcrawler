@@ -1,5 +1,7 @@
 import importlib
+
 from flask import Flask, request
+from flask_wtf.csrf import CSRFProtect
 
 from clients import client_map
 import config
@@ -7,6 +9,8 @@ from db import ClientUser
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = config.FLASK_SECRET
+
+CSRFProtect(app)
 
 @app.before_request
 def before_request():
@@ -16,12 +20,14 @@ def before_request():
         request.client.code,
     )
 
-
 ROUTE_MAP = {
     '/': 'home',
     '/login': 'login',
     '/google-login-start': 'google_login_start',
     '/google-login-callback': 'google_login_callback',
+    '/profile': 'profile',
+    '/logout': 'logout',
+    '/upload-resume': 'upload_resume',
 }
 
 for path, module_name in ROUTE_MAP.items():

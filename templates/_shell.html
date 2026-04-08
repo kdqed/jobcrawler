@@ -17,13 +17,15 @@
 <body>
 
   <header>
-    <a href="/" class="header-home-link">
+    <a href="/" class="home-link">
       <img src="{{request.client.logo_url}}"/>
       <span>{{request.client.name}}</span>
     </a>
-    <nav class="header-nav">
+    <nav class="main-nav">
       {% if request.user %}
-        <a href="/account" class="clk-inline">{{request.user.name}}</a>
+        <a href="/profile" class="clk-solid">
+          ☰&nbsp {{request.user.name}}
+        </a>
       {% else %}
         <a href="/login" class="clk-solid">Login</a>
       {% endif %}
