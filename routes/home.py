@@ -10,7 +10,6 @@ def handler():
         return wrap(render_template('home.html'))
   
     resume = UserResume.select(id=request.user.id).one()
-    print(resume.match_vec, type(resume.match_vec))
     vec = resume.match_vec.tolist()
     if resume:
         jobs = Job.select().order_by(VNN.cos('match_vec', vec))[:50]

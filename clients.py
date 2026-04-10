@@ -16,7 +16,13 @@ class Boole(metaclass=_Client):
     code = "boole"
     name = "Boole Jobs"
 
+
+class Staging(metaclass=_Client):
+    code = 'staging'
+    name = 'Xerowork Staging'
+
     
 client_map = {
     'localhost:4071': Boole,
+    'xwstg.kdqed.com': Staging,
 }
