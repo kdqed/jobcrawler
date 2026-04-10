@@ -40,7 +40,7 @@ while True:
     
             if job_url.url == response.url:
                 result = parsers[job_url.src].parse_job(job_url.url, response.content)
-                result['match_vec'] = ml_utils.vectorize(result['title'], result['description'])
+                result['pplx_vec'] = ml_utils.vectorize(result['title'], result['description'])
                 Job.add(
                     url = job_url.url,
                     src = job_url.src,

@@ -96,11 +96,13 @@ class Job:
     description: str
 
     match_vec: Vector(768) | None
+    pplx_vec: Vector(1024) | None
     
     __idli__ = [
         BTreeIndex('url'),
         BTreeIndex('-date_posted'),
         HNSWIndex('match_vec', 'cos'),
+        HNSWIndex('pplx_vec', 'cos'),
     ]
 
 
@@ -116,7 +118,7 @@ class Job:
             'title', 'org_name', 'org_logo', 'is_remote',
             'loc_locality', 'loc_region', 'loc_country', 'loc_postcode',
             'employment_type', 'date_posted', 'valid_through', 'description',
-            'match_vec',
+            'match_vec', 'pplx_vec',
         ]:
             setattr(job, key, details[key])
         
@@ -186,7 +188,8 @@ class ClientUser:
 class UserResume:
     id: UUID
     filename: str
-    match_vec: Vector(768)
+    match_vec: Vector(768) | None
+    pplx_vec: Vector(1024)
     updated: datetime
     
     @property

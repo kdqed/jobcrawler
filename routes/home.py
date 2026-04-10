@@ -10,9 +10,9 @@ def handler():
         return wrap(render_template('home.html'))
   
     resume = UserResume.select(id=request.user.id).one()
-    vec = resume.match_vec.tolist()
     if resume:
-        jobs = Job.select().order_by(VNN.cos('match_vec', vec))[:50]
+        vec = resume.pplx_vec.tolist()
+        jobs = Job.select().order_by(VNN.cos('pplx_vec', vec))[:50]
         return wrap(render_template('home.html', jobs=jobs, customized=True))
     else:
         jobs = Job.select().order_by('-date_posted')[:50]

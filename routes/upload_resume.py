@@ -32,7 +32,7 @@ def handler():
     
     md = MarkItDown(enable_plugins=True)
     resume_text = md.convert(resume_dir / resume.filename).text_content
-    resume.match_vec = ml_utils.vectorize(resume_text)
+    resume.pplx_vec = ml_utils.vectorize(resume_text)
     resume.updated = datetime.now()
     
     resume.save()
