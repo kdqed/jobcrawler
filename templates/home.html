@@ -15,10 +15,15 @@
   
   {% for job in jobs %}
     <section>
-      <a href="{{job.url}}" class="job-link-card" target="_blank">
+      <a href="/job/{{job.id}}" class="job-link-card">
         <img src="{{job.org_logo}}" class="logo"/>
-        <div class="title"><b>{{job.title}}</b></div>
-        <div>
+        <div class="title">
+          <b>{{job.title}}</b>
+        </div>
+        <div class="attr">
+          {% if job.match_score %}
+            <em>🌟 {{job.match_score}}% Match</em>
+          {% endif %}
           <em>👥 {{job.org_name}}</em>
           <em>📍 {{job.loc_locality}}</em>
           <em>🗓️ {{job.fmt_time_ago}}</em>

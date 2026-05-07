@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  
+  <style>
+    @page {
+      margin: 2.54cm;
+    }
+    
+    :root {
+      --cp: #2c3e50;
+      --cb: #ffffff;
+      --cb2: #e0e0e0;
+      --ca: #0051ca;
+      --ca2: #001d47;
+      --ca3: #bbd6ff;
+      --font-main: 'Inter', sans-serif;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: var(--font-main);
+      line-height: 1.6;
+      background: var(--cb);
+      color: var(--cp);
+    }
+    
+    a {
+      color: inherit;
+    }
+  </style>
+</head>
+<body>
+  {{resume.html_content | safe}}
+</body>
+</html>

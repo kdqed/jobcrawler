@@ -31,8 +31,8 @@ def handler():
     resume_file.save(resume_dir / resume.filename)
     
     md = MarkItDown(enable_plugins=True)
-    resume_text = md.convert(resume_dir / resume.filename).text_content
-    resume.pplx_vec = ml_utils.vectorize(resume_text)
+    resume.markdown_content = md.convert(resume_dir / resume.filename).text_content
+    resume.pplx_vec = ml_utils.vectorize(resume.markdown_content)
     resume.updated = datetime.now()
     
     resume.save()

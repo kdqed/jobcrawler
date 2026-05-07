@@ -1,0 +1,16 @@
+<section class="custom-resume-hero">
+  <p>
+    ✨ This is your customized resume for the job "<a href="/job/{{job.id}}">{{job.title}}</a>"
+  </p>
+  <p>
+    <form action="/customize-resume/{{job.id}}" method="POST">
+      <a href="/download-custom-resume/{{job.id}}" class="clk-solid">Download PDF</a>
+      <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
+      <button class="clk-solid">Redo Customize</button>
+    </form>
+  </p>
+</section>
+
+<section class="custom-resume-html">
+  {{ resume.html_content | safe }}
+</section>

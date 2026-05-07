@@ -22,7 +22,12 @@ class Staging(metaclass=_Client):
     name = 'Xerowork Staging'
 
     
+class Default(metaclass=_Client):
+    code = 'default'
+    name = 'Xerowork'
+
+    
 client_map = {
-    'localhost:4071': Boole,
-    'xwstg.kdqed.com': Staging,
+    'localhost:4071': Default,
+    'xwstg.kdqed.com': Default,
 }

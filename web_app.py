@@ -28,6 +28,11 @@ ROUTE_MAP = {
     '/profile': 'profile',
     '/logout': 'logout',
     '/upload-resume': 'upload_resume',
+    
+    '/job/<job_id>': 'job_page',
+    '/customize-resume/<job_id>': 'customize_resume',
+    '/raw-pdf-resume': 'raw_pdf_resume',
+    '/download-custom-resume/<job_id>': 'download_custom_resume',
 }
 
 for path, module_name in ROUTE_MAP.items():

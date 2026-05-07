@@ -104,11 +104,14 @@ footer {
 }
 
 .clk-solid {
-  display: inline-block;
+  display: inline-flex;
   background: var(--ca);
   text-decoration: none;
   border-radius: 0.2rem;
   padding: 0.25rem 1rem;
+  height: 2rem;
+  align-content: center;
+  align-items: center;
   color: var(--cb);
   border: 0.1rem solid var(--ca2);
   font-size: 0.9rem;
@@ -139,12 +142,21 @@ footer {
   div {
     display: flex;
     align-items: center;
-    gap: 0 1rem; 
+    gap: 0 0.5rem; 
     flex-wrap: wrap;
     
     em {
       font-size: 0.9rem;
     }
+  }
+  
+  .match-score {
+    background: var(--ca2);
+    color: var(--ca3);
+    font-size: 0.7rem;
+    display: inline-block;
+    padding: 0.2rem 0.4rem 0.15rem 0.5rem;
+    border-radius: 0.1rem;
   }
 
   &:hover {
@@ -158,8 +170,91 @@ footer {
 
 /* --- 5. PAGE-SPECIFIC --- */
 /* Use prefixes to keep these isolated */
+.custom-resume-hero {
+  padding: 0.5rem;
+  background: var(--ca3);
+  border-radius: 0.2rem;
+  display: grid;
+  gap: 0.5rem;
+  border: 0.1rem solid var(--cb2);
+  
+  form {
+    display: inline-flex;
+  }
+}
+
 .home-hero {
   height: 60vh;
   display: flex;
   align-items: center;
+}
+
+.job-page-hero {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  align-items: center;
+  align-content: center;
+  gap: 1rem;
+  
+  padding: 1rem 0 2rem 0;
+  border-bottom: 0.1rem solid var(--cb2);
+    
+  .logo {
+    width: 6rem;
+    height: 6rem;
+    object-fit: contain;
+    background: #ffffff;
+    border-radius: 0.2rem;
+    padding: 0.5rem;
+    border: 0.1rem solid var(--cb2);
+    grid-row: span 2;
+  }
+  
+  h1 {
+    font-size: 1.2rem;
+    align-self: center;
+  }
+  
+  .attr {
+    display: flex;
+    align-items: center;
+    gap: 0 0.5rem; 
+    flex-wrap: wrap;
+    
+    em {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+.job-page-actions-container {
+  position: fixed;
+  z-index: 20;
+  left: 0;
+  width: 100%;
+  top: 75vh;
+  height: auto;
+  text-align: center;
+}
+
+.job-page-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--cb);
+  padding: 0.5rem;
+  border: 0.1rem solid var(--cb2);
+  border-radius: 0.2rem;
+  box-shadow: 0 0 0.5rem 0.05rem  rgba(0, 0, 0, 0.3);
+  
+  em {
+    font-size: 0.8rem;
+  }
+}
+
+.profile-resume {
+  iframe.current-resume {
+    width: 100%;
+    height: 100vh;
+  }
 }

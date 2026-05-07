@@ -3,6 +3,8 @@ from uuid import UUID
 
 from idli import AutoUUID, BTreeIndex, Connection, HNSWIndex, Vector
 import jwt
+import mistune
+import nh3
 
 import config
 
@@ -135,6 +137,8 @@ class ClientUser:
     name: str
     email: str
     client: str
+    credits: int = 0
+    credits_last_used: datetime = datetime(1970, 1, 1)
     
     # match_vec: Vector(768) | None
     # add separate table
@@ -188,6 +192,7 @@ class ClientUser:
 class UserResume:
     id: UUID
     filename: str
+    markdown_content: str = ''
     match_vec: Vector(768) | None
     pplx_vec: Vector(1024)
     updated: datetime
@@ -195,3 +200,24 @@ class UserResume:
     @property
     def updated_time_ago(self):
         return to_time_ago(self.updated)
+
+
+@db.Model
+class CustomizedResume:
+    id: UUID = AutoUUID
+    user_id: UUID
+    job_id: UUID
+    markdown_content: str
+    created: datetime
+    updated: datetime
+    pdf_timestamp: datetime = datetime(1970, 1, 1)
+    
+    __idli__ = [
+        BTreeIndex('user_id', 'job_id')
+    ]
+    
+    @property
+    def html_content(self):
+        unsafe_html = mistune.html(self.markdown_content)
+        safe_html = nh3.clean(unsafe_html)
+        return safe_html
