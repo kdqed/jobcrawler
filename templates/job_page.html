@@ -15,12 +15,20 @@
     <a href="{{job.url}}" class="clk-solid" target="_blank">Apply Now</a>
     <form action="/customize-resume/{{job.id}}" method="POST">
       <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
-      <button class="clk-solid">✨ Customize Resume</button>
+      <button class="clk-solid">[🪙 10] Customize Resume</button>
     </form>
   </div>
 </section>
 <section class="job-page-description">
   {% for line in job.description.split("\n") %}
     <p>{{line}}</p>
+  {% endfor %}
+</section>
+<section class="jobs-list">
+  <h3>Similar Jobs</h3>
+  {% for job in similar_jobs %}
+    {% with job=job %}
+      {% include 'components/job_link_card.html' %}
+    {% endwith %}
   {% endfor %}
 </section>

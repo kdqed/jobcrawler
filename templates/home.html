@@ -13,24 +13,13 @@
     </p>
   {% endif %}
   
-  {% for job in jobs %}
-    <section>
-      <a href="/job/{{job.id}}" class="job-link-card">
-        <img src="{{job.org_logo}}" class="logo"/>
-        <div class="title">
-          <b>{{job.title}}</b>
-        </div>
-        <div class="attr">
-          {% if job.match_score %}
-            <em>🌟 {{job.match_score}}% Match</em>
-          {% endif %}
-          <em>👥 {{job.org_name}}</em>
-          <em>📍 {{job.loc_locality}}</em>
-          <em>🗓️ {{job.fmt_time_ago}}</em>
-        </div>
-      </a>
-    </section>
-  {% endfor %}
+  <section class="jobs-list">
+    {% for job in jobs %}
+      {% with job=job %}
+        {% include 'components/job_link_card.html' %}
+      {% endwith %}
+    {% endfor %}
+  </section>
 {% else %}
   <h1>Job Search for the AI age</h1>
   <p>Upload Resume -> See Matching Jobs -> Apply</p>

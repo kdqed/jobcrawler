@@ -1,4 +1,6 @@
+import dataclasses
 from datetime import datetime
+
 from flask import abort, redirect, render_template, request
 from idli import VNN
 from pydantic import BaseModel, Field
@@ -28,6 +30,13 @@ def handler(job_id):
     job = Job.select(id=job_id).one()
     if not job:
         return "Job Not Found", 404
+    
+    if not job.is_still_live():
+        #job.delete()
+        return redirect(f'/job-expired/{job.id}')
+    
+    if request.user.credits < 10:
+        return "Not Enough Credits", 403
     
     llm_agent = Agent(
         OpenAIChatModel(
@@ -96,5 +105,11 @@ def handler(job_id):
     custom_resume.markdown_content = llm_result.output
     custom_resume.updated = datetime.now()
     custom_resume.save()
+    
+    request.user.debit(
+        credits = 10, 
+        note = f"CUSTOMIZE_RESUME:{job.id}",
+        api_usage = dataclasses.asdict(llm_result.usage()),
+    )
     
     return redirect(f'/customize-resume/{job.id}')

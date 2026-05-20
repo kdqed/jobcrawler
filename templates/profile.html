@@ -6,6 +6,14 @@
   {% if resume %} {{resume.updated_time_ago}} {% else %} Not Uploaded {% endif %}
 </p>
 <p>
+  <b>Credit Balance:</b>
+  🪙 {{request.user.credits}}
+</p>
+<p>
+  <b>Credits Last Used:</b>
+  {{request.user.credits_last_used_time_ago}}
+</p>
+<p>
   <a href="/logout" class="clk-inline">Logout</a>
 </p>
 

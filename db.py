@@ -1,10 +1,12 @@
 from datetime import datetime
+import json
 from uuid import UUID
 
-from idli import AutoUUID, BTreeIndex, Connection, HNSWIndex, Vector
+from idli import AutoUUID, BTreeIndex, Connection, HNSWIndex, Vector, VNN
 import jwt
 import mistune
 import nh3
+import niquests
 
 import config
 
@@ -126,9 +128,24 @@ class Job:
         
         job.save()
     
+    
     @property
     def fmt_time_ago(self):
         return to_time_ago(self.date_posted)
+    
+    
+    def is_still_live(self):
+        r = niquests.head(self.url)
+        return r.status_code == 200
+    
+    def get_similar_jobs(self):
+        vec = self.pplx_vec.tolist()
+        jobs = list(Job.select().order_by(VNN.cos('pplx_vec', vec))[1:6])
+        for job in jobs:
+            raw_score = (job.pplx_vec__vd__cos/2) ** 2
+            job.match_score = round(100*(1-raw_score))
+        return jobs
+        
 
 
 @db.Model
@@ -186,6 +203,28 @@ class ClientUser:
             algorithm = 'HS256',
         )
         return encoded_jwt
+    
+    
+    def debit(self, credits: int, note: str, api_usage: dict):
+        timestamp = datetime.now()
+        
+        usage_log = CreditUseLog(
+            user_id = self.id,
+            timestamp = timestamp,
+            credits = credits,
+            note = note,
+            api_usage = json.dumps(api_usage)
+        )
+        usage_log.save()
+      
+        self.credits = self.credits - credits
+        self.credits_last_used = timestamp
+        self.save()
+    
+        
+    @property
+    def credits_last_used_time_ago(self):
+        return to_time_ago(self.credits_last_used)
 
 
 @db.Model
@@ -221,3 +260,13 @@ class CustomizedResume:
         unsafe_html = mistune.html(self.markdown_content)
         safe_html = nh3.clean(unsafe_html)
         return safe_html
+
+        
+@db.Model
+class CreditUseLog:
+    id: UUID = AutoUUID
+    user_id: UUID
+    timestamp: datetime
+    credits: int
+    note: str
+    api_usage: str

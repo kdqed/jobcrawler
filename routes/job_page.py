@@ -41,4 +41,6 @@ def handler(job_id):
         cos_sim = pg_cosine_distance(job.pplx_vec, resume.pplx_vec)
         user_score = (cos_sim/2) ** 2
         job.match_score = round(100*(1-user_score))
-    return wrap(render_template('job_page.html', job=job, similar_jobs=[]))
+    
+    similar_jobs = job.get_similar_jobs()
+    return wrap(render_template('job_page.html', job=job, similar_jobs=similar_jobs))

@@ -33,6 +33,8 @@ ROUTE_MAP = {
     '/customize-resume/<job_id>': 'customize_resume',
     '/raw-pdf-resume': 'raw_pdf_resume',
     '/download-custom-resume/<job_id>': 'download_custom_resume',
+    
+    '/job-expired/<job_id>': 'job_expired',
 }
 
 for path, module_name in ROUTE_MAP.items():

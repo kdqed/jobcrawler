@@ -92,6 +92,7 @@ main {
   min-height: 80vh;
   padding: 1rem;
   gap: 1rem;
+  padding-bottom: 25vh;
 }
 
 footer {

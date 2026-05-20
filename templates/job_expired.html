@@ -1,0 +1,12 @@
+<section>
+  <h1>{{job.title}}</h1>
+  <p><em>This job has expired.</em> Don't worry, no credits were used for this request.</p>
+</section>
+<section class="jobs-list">
+  <h3>And here are similar, recently posted jobs:</h3>
+  {% for job in similar_jobs %}
+    {% with job=job %}
+      {% include 'components/job_link_card.html' %}
+    {% endwith %}
+  {% endfor %}
+</section>
