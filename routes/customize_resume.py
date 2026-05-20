@@ -9,7 +9,7 @@ from pydantic_ai.models.openai import OpenAIChatModel
 from pydantic_ai.providers.openai import OpenAIProvider
 
 import config
-from db import Job, CustomizedResume, UserResume
+from db import Job, UserJob, UserResume
 from web_utils import wrap
   
 
@@ -49,27 +49,26 @@ def handler(job_id):
         output_type = TextOutput(text_output_fn),
     )
     
-    custom_resume = CustomizedResume.select(
+    user_job = UserJob.select(
         user_id = request.user.id,
         job_id = job.id
     ).one()
     
     if request.method == 'GET':
-        if custom_resume:
+        if user_job:
             return wrap(render_template(
                 'custom_resume.html', 
-                resume = custom_resume,
+                user_job = user_job,
                 job = job,
             ))
         else:
             return "Custom Resume Not Found", 404
     
     
-    if not custom_resume:
-        custom_resume = CustomizedResume(
+    if not user_job:
+        user_job = UserJob(
             user_id = request.user.id,
             job_id = job.id,
-            created = datetime.now()
         )
     
     prompt = f"""
@@ -102,9 +101,9 @@ def handler(job_id):
         max_tokens=8192
     ))
   
-    custom_resume.markdown_content = llm_result.output
-    custom_resume.updated = datetime.now()
-    custom_resume.save()
+    user_job.cr_markdown_content = llm_result.output
+    user_job.cr_generated_at = datetime.now()
+    user_job.save()
     
     request.user.debit(
         credits = 10, 

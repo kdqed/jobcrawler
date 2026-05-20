@@ -1,27 +1,36 @@
-{% if request.user %}
-  <h1>Hello {{request.user.name}}</h1>
-  {% if customized %}
-    <p>Here are some job postings suitable for your resume:</p>
-  {% else %}
-    <p>
-      💡We can create a customized job feed matching your resume!
-    </p>
-    <p>
-      <a href="/profile#resumeupload" class="clk-solid">
-        Upload Resume Now
-      </a>
-    </p>
-  {% endif %}
+<div class="content">
+  {% if request.user %}
+    {% if customized %}
+      <h1>Curated Jobs For {{request.user.name}}</h1>
+    {% else %}
+      <h1>Latest Jobs</h1>
+      <p>
+        💡We can create a customized job feed matching your resume!
+      </p>
+      <p>
+        <a href="/profile#resumeupload" class="clk-solid">
+          Upload Resume Now
+        </a>
+      </p>
+    {% endif %}
+    
+    <section class="only-mobile">
+      {% include "components/job_feed_filters.html" %}
+    </section>
   
-  <section class="jobs-list">
-    {% for job in jobs %}
-      {% with job=job %}
-        {% include 'components/job_link_card.html' %}
-      {% endwith %}
-    {% endfor %}
-  </section>
-{% else %}
-  <h1>Job Search for the AI age</h1>
-  <p>Upload Resume -> See Matching Jobs -> Apply</p>
-  <p><a href="/login" class="clk-solid">Login To Start</a></p>
-{% endif %}
+    <section class="jobs-list">
+      {% for job in jobs %}
+        {% with job=job %}
+          {% include 'components/job_link_card.html' %}
+        {% endwith %}
+      {% endfor %}
+    </section>
+  {% else %}
+    <h1>Job Search for the AI age</h1>
+    <p>Upload Resume -> See Matching Jobs -> Apply</p>
+    <p><a href="/login" class="clk-solid">Login To Start</a></p>
+  {% endif %}
+</div>
+<aside>
+  {% include "components/job_feed_filters.html" %}
+</aside>

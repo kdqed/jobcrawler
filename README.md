@@ -5,22 +5,28 @@
 x 10 Credits For Customize Resume
 x Show similar jobs for every job / expired job
 x Check Job Not Expired Before Customize Resume
-- Sidebar With Application Flow with bottom hamburger on mobile, do mobile first
-- For no resume users; show some categories in the sidebar
-- Replace Emojis with Icons
+x Sidebar With Application Flow with bottom hamburger on mobile, do mobile first
+x Letter for profile icon
 - UI improvements
+- Color the match score
+- Logo for dark theme
+- Star a job
+- If resume already customized, say "View Custom Resume"
+- Replace Emojis with Icons
+- Confirmations Before Credit Spends
 - Show Credit Usage Log
 
-- Country Filter
-- City Filter
-- Remote Filter
-- Weeks (Freshness) Sliding Filter (1,2,3,4,6, and 12 weeks)
-
+- Handle Multiple Job Locations
 - Get board URLs from daily Google SERP
 - Get Jobs from boards
 - Keep jobs synced to make sure they are not expired
 - nh3 clean all fields on job data JSON
 - Cache company logos
+
+- Country Filter
+- City Filter
+- Remote Filter
+- Weeks (Freshness) Sliding Filter (1,2,3,4,6, and 12 weeks)
 
 - Move deleted jobs to separate table and show similar jobs on 404 page
 - Userwise Rate Limit Credit Use or just do a credit use lock
@@ -33,6 +39,7 @@ x Check Job Not Expired Before Customize Resume
 - Track applications as applied etc. (Kanban style)
 
 - Tinker and select best AI Models
+- Use Starred Jobs for showing User Job Feed
 - Revise credits for actions, make them easily changeable in code
 - Email login
 - Use JSON Resume for resume processing

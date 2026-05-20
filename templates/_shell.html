@@ -10,9 +10,13 @@
   
   <link rel="shortcut icon" type="image/png" href="{{request.client.favicon_url}}">
   
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!--<link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="/static/css/style.css">
 </head>
@@ -23,24 +27,30 @@
       <img src="{{request.client.logo_url}}"/>
       <span>{{request.client.name}}</span>
     </a>
-    <nav class="main-nav">
-      {% if request.user %}
-        <a href="/profile" class="clk-solid">
-          ☰&nbsp {{request.user.name}}
-        </a>
-      {% else %}
-        <a href="/login" class="clk-solid">Login</a>
-      {% endif %}
-    </nav>
+    {% if request.user %}
+      <a href="/profile" class="clk-solid profile">
+        {{request.user.name[:1]}}
+      </a>
+    {% else %}
+      <a href="/login" class="clk-solid">Login</a>
+    {% endif %}
   </header>
-
+  
+  <nav class="main-menu">
+    <label for="main-menu-toggle">☰</label>
+    <input type="checkbox" id="main-menu-toggle"/>
+    <div class="link-list">
+      <a href="/">Jobs For You</a>
+      <a href="/starred">Starred Jobs</a>
+      <a href="/applied">Applied Jobs</a>
+      <a href="/customized-resumes">Customized Resumes</a>
+      <a href="/profile">My Profile</a>
+    </div>
+  </nav>
+  
   <main>
     {{content | safe}}
   </main>
-
-  <footer>
-    <p>Powered by Xerowork</p>
-  </footer>
 
 </body>
 </html>

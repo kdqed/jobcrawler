@@ -1,29 +1,31 @@
-<h1>My Profile</h1>
-<p><b>Name:</b> {{request.user.name}}</p>
-<p><b>Email:</b> {{request.user.email}}</p>
-<p>
-  <b>Resume Last Updated:</b> 
-  {% if resume %} {{resume.updated_time_ago}} {% else %} Not Uploaded {% endif %}
-</p>
-<p>
-  <b>Credit Balance:</b>
-  🪙 {{request.user.credits}}
-</p>
-<p>
-  <b>Credits Last Used:</b>
-  {{request.user.credits_last_used_time_ago}}
-</p>
-<p>
-  <a href="/logout" class="clk-inline">Logout</a>
-</p>
+<div class="content">
+  <h1>My Profile</h1>
+  <p><b>Name:</b> {{request.user.name}}</p>
+  <p><b>Email:</b> {{request.user.email}}</p>
+  <p>
+    <b>Resume Last Updated:</b> 
+    {% if resume %} {{resume.updated_time_ago}} {% else %} Not Uploaded {% endif %}
+  </p>
+  <p>
+    <b>Credit Balance:</b>
+    🪙 {{request.user.credits}}
+  </p>
+  <p>
+    <b>Credits Last Used:</b>
+    {{request.user.credits_last_used_time_ago}}
+  </p>
+  <p>
+    <a href="/logout" class="clk-inline">Logout</a>
+  </p>
 
-<form method="POST" action="/upload-resume" enctype="multipart/form-data" id="resumeupload" class="profile-resume">
-  <h2>Resume</h2>
-  <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
-  <label>
-    <span>Need to update? Select file:</span>
-    <input type="file" name="resume" accept=".pdf, .doc, .docx" required/>
-  </label>
-  <button type="submit" class="clk-solid">Upload</button>
-  <iframe src="/raw-pdf-resume" class="current-resume"></iframe>
-</form>
+  <form method="POST" action="/upload-resume" enctype="multipart/form-data" id="resumeupload" class="profile-resume">
+    <h2>Resume</h2>
+    <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
+    <label>
+      <span>Need to update? Select file:</span>
+      <input type="file" name="resume" accept=".pdf, .doc, .docx" required/>
+    </label>
+    <button type="submit" class="clk-solid">Upload</button>
+    <iframe src="/raw-pdf-resume" class="current-resume"></iframe>
+  </form>
+</div>

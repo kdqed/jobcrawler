@@ -1,34 +1,34 @@
-<section class="job-page-hero">
-  <img src="{{job.org_logo}}" class="logo"/>
-  <h1>{{job.title}}</h1>
-  <div class="attr">
-    <em>👥 {{job.org_name}}</em>
-    <em>📍 {{job.loc_locality}}</em>
-    <em>🗓️ {{job.fmt_time_ago}}</em>
-  </div>
-</section>
-<section class="job-page-actions-container">
-  <div class="job-page-actions">
-    {% if job.match_score %}
-      <em>🌟 {{job.match_score}}% Match</em>
-    {% endif %}
-    <a href="{{job.url}}" class="clk-solid" target="_blank">Apply Now</a>
-    <form action="/customize-resume/{{job.id}}" method="POST">
-      <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
-      <button class="clk-solid">[🪙 10] Customize Resume</button>
-    </form>
-  </div>
-</section>
-<section class="job-page-description">
-  {% for line in job.description.split("\n") %}
-    <p>{{line}}</p>
-  {% endfor %}
-</section>
-<section class="jobs-list">
-  <h3>Similar Jobs</h3>
-  {% for job in similar_jobs %}
-    {% with job=job %}
-      {% include 'components/job_link_card.html' %}
-    {% endwith %}
-  {% endfor %}
-</section>
+<div class="content"> 
+  <section class="job-page-hero">
+    <img src="{{job.org_logo}}" class="logo"/>
+    <h1>{{job.title}}</h1>
+    <div class="attr">
+      <em>👥 {{job.org_name}}</em>
+      <em>📍 {{job.loc_locality}}</em>
+      <em>🗓️ {{job.fmt_time_ago}}</em>
+    </div>
+  </section>
+  <section class="only-mobile">
+    {% include "components/job_page_actions.html" %}
+  </section>
+  <section class="job-page-description">
+    {% for line in job.description.split("\n") %}
+      <p>{{line}}</p>
+    {% endfor %}
+  </section>
+  <section class="only-mobile">
+    {% include "components/job_page_actions.html" %}
+  </section>
+  <section class="jobs-list">
+    <h3>Similar Jobs</h3>
+    {% for job in similar_jobs %}
+      {% with job=job %}
+        {% include 'components/job_link_card.html' %}
+      {% endwith %}
+    {% endfor %}
+  </section>
+</div>
+<aside>
+  {% include "components/job_page_actions.html" %}
+
+</aside>
