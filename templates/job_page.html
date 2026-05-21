@@ -3,12 +3,15 @@
     <img src="{{job.org_logo}}" class="logo"/>
     <h1>{{job.title}}</h1>
     <div class="attr">
+      {% if job.match_score %}
+        <em>🌟 {{job.match_score}}% Match</em>
+      {% endif %}
       <em>👥 {{job.org_name}}</em>
       <em>📍 {{job.loc_locality}}</em>
       <em>🗓️ {{job.fmt_time_ago}}</em>
     </div>
   </section>
-  <section class="only-mobile">
+  <section>
     {% include "components/job_page_actions.html" %}
   </section>
   <section class="job-page-description">
@@ -16,7 +19,7 @@
       <p>{{line}}</p>
     {% endfor %}
   </section>
-  <section class="only-mobile">
+  <section>
     {% include "components/job_page_actions.html" %}
   </section>
   <section class="jobs-list">
@@ -28,7 +31,3 @@
     {% endfor %}
   </section>
 </div>
-<aside>
-  {% include "components/job_page_actions.html" %}
-
-</aside>

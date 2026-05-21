@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import request, render_template
 
 
 def wrap(content, title="Job Search", desciption="Upload resume, find jobs"):

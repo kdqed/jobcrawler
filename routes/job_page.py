@@ -36,11 +36,17 @@ def handler(job_id):
     if not job:
         abort(404)
     
+    similar_jobs = job.get_similar_jobs()
     resume = UserResume.select(id=request.user.id).one()
+    
     if resume:
         cos_sim = pg_cosine_distance(job.pplx_vec, resume.pplx_vec)
         user_score = (cos_sim/2) ** 2
         job.match_score = round(100*(1-user_score))
     
-    similar_jobs = job.get_similar_jobs()
+        for s_job in similar_jobs:
+            cos_sim = pg_cosine_distance(s_job.pplx_vec, resume.pplx_vec)
+            raw_score = (cos_sim/2) ** 2
+            s_job.match_score = round(100*(1-raw_score))
+        
     return wrap(render_template('job_page.html', job=job, similar_jobs=similar_jobs))

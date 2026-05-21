@@ -1,13 +1,13 @@
 <div class="job-page-actions">
-  {% if job.match_score %}
-    <div class="match-score">
-      <span>{{job.match_score}}%</span>
-      <em>Match<br>Score</em>
-    </div>
-  {% endif %}
-  <a href="{{job.url}}" class="clk-solid" target="_blank">Apply Now</a>
-  <form action="/customize-resume/{{job.id}}" method="POST">
-    <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
-    <button class="clk-solid">✨ Customize Resume</button>
-  </form>
+  <div>
+    <a href="{{job.url}}" class="clk-solid" target="_blank">Apply Now</a>
+    <form action="/customize-resume/{{job.id}}" method="POST">
+      <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
+      <button class="clk-solid">Star</button>
+    </form>
+    <form action="/customize-resume/{{job.id}}" method="POST">
+      <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
+      <button class="clk-solid">✨ Customize Resume</button>
+    </form>
+  </div>
 </div>

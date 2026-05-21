@@ -7,14 +7,17 @@ x Show similar jobs for every job / expired job
 x Check Job Not Expired Before Customize Resume
 x Sidebar With Application Flow with bottom hamburger on mobile, do mobile first
 x Letter for profile icon
-- UI improvements
-- Color the match score
-- Logo for dark theme
-- Star a job
+x UI improvements
+x Logo for dark theme
 - If resume already customized, say "View Custom Resume"
+- List Custom Resumes
+- Star a job
+- Mark as Applied
 - Replace Emojis with Icons
 - Confirmations Before Credit Spends
+- Show JD Page in Iframe
 - Show Credit Usage Log
+- Fix All Pages
 
 - Handle Multiple Job Locations
 - Get board URLs from daily Google SERP

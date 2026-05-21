@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>{{title}}</title>
+  <title>{{request.client.name}}</title>
   
   <meta name="description" content="{{description}}">
   
@@ -24,8 +24,9 @@
 
   <header>
     <a href="/" class="home-link">
-      <img src="{{request.client.logo_url}}"/>
-      <span>{{request.client.name}}</span>
+      <img src="{{request.client.logo_url}}" class="light-only"/>
+      <img src="{{request.client.logo_url_dark}}" class="dark-only"/>
+      <!--<span>{{request.client.name}}</span>-->
     </a>
     {% if request.user %}
       <a href="/profile" class="clk-solid profile">

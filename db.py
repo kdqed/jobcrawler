@@ -141,9 +141,6 @@ class Job:
     def get_similar_jobs(self, count=10):
         vec = self.pplx_vec.tolist()
         jobs = list(Job.select().order_by(VNN.cos('pplx_vec', vec))[1:count+1])
-        for job in jobs:
-            raw_score = (job.pplx_vec__vd__cos/2) ** 2
-            job.match_score = round(100*(1-raw_score))
         return jobs
         
 

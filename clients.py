@@ -10,6 +10,10 @@ class _Client(type):
     @property
     def logo_url(cls):
         return f'/static/clients/{cls.code}_logo.png'
+    
+    @property
+    def logo_url_dark(cls):
+        return f'/static/clients/{cls.code}_logo_dark.png'
 
 
 class Boole(metaclass=_Client):

@@ -11,24 +11,32 @@
   --cp: #2c3e50;
   --cb: #ffffff;
   --cb2: #efefef;
-  --ca: #0051ca;
-  --ca2: #001d47;
-  --ca3: #bbd6ff;
+  --cb3: #d0d0d0;
+  --ca: #106673;
+  --ca2: #08343b;
+  --ca3: #c3eff7;
   --font-main: 'Figtree', sans-serif;
   --base-size: clamp(16px, 1.4vw, 32px);
   --max-width: calc(40 * var(--base-size));
   font-size: var(--base-size);
 }
 
+.light-only {display: initial;}
+.dark-only {display: none;}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --cp: #d1dce6;
-    --cb: #25292e;
-    --cb2: #161a1f;
-    --ca: #56c3d1;
-    --ca2: #174d54;
-    --ca3: #0e2f33;
+    --cb: #202425;
+    --cb2: #1b1e1f;
+    --cb3: #343940;
+    --ca: #5cacb8;
+    --ca2: #2b5b62;
+    --ca3: #1a373c;
   }
+  
+  .light-only {display: none;}
+  .dark-only {display: initial;}
 }
 
 * {
@@ -70,13 +78,17 @@ form {
 
 h1 {
   color: var(--ca);
+  font-size: 1.5rem;
 }
 
 h2 {
   width: 100%;
   padding-top: 1rem;
   margin-top: 0.5rem;
-  border-top: 0.1rem solid var(--cb2);
+}
+
+h3 {
+  padding: 0.5rem;
 }
 
 .only-mobile {
@@ -109,8 +121,11 @@ header {
     font-weight: 700;
     
     img {
-      height: 1.5rem;
-      width: auto;
+      height: 2rem;
+      width: 2rem;
+      object-fit: contain;
+      padding: 0.15rem;
+      border-radius: 0.2rem;
     }
   }
   
@@ -130,26 +145,20 @@ main {
   width: 100%;
   grid-area: 1 / 2 / 3 / 3;
   display: grid;
-  grid-template-columns: 1fr 15rem;
+  grid-template-columns: 1fr;
   gap: 1rem;
   padding: 1rem;
+  overflow-y: scroll;
+  height: 100%;
   
   .content {
     display: grid;
+    max-width: 116vh;
     width: 100%;
     padding: 0;
     padding-right: 1rem;
     gap: 1rem;
     padding-bottom: 25vh;
-    height: 100%;
-    overflow-y: scroll;
-  }
-  
-  aside {
-    padding: 0.5rem;
-    background: var(--cb2);
-    align-self: start;
-    border-radius: 0.2rem
   }
   
   @media screen and (max-width: 720px) {
@@ -162,29 +171,12 @@ main {
       padding-right: 0;
     }
     
-    aside {
-      display: none;
-    }
   }
-}
-
-main .content::-webkit-scrollbar {
-  width: 0.25rem;
-}
-    
-main .content::-webkit-scrollbar-track {
-  margin: 1rem 0;
-  background: transparent;
-}
-
-main .content::-webkit-scrollbar-thumb {
-  background: var(--cb2);
-  border-radius: 10px;
 }
 
 nav.main-menu {
   width: 100%;
-  padding: 2rem 3rem 2rem 1rem;
+  padding: 2rem 3rem 2rem 1.25rem;
   border-right: 0.1rem solid var(--cb2);
   background: var(--cb2);
   
@@ -244,14 +236,14 @@ nav.main-menu {
 
 .clk-solid {
   display: inline-flex;
-  background: var(--ca);
+  background: var(--ca3);
   text-decoration: none;
   border-radius: 0.2rem;
-  padding: 0.25rem 0.5rem;
-  height: 2rem;
+  padding: 0.5rem 0.75rem;
+  height: 2.2rem;
   align-content: center;
   align-items: center;
-  color: var(--cb);
+  color: var(--cp);
   border: 0.1rem solid var(--ca2);
   font-size: 0.9rem;
   font-weight: 700;
@@ -265,7 +257,7 @@ nav.main-menu {
   grid-template-rows: auto auto;
   gap: 0 1rem;
   text-decoration: none;
-  border-top: 0.1rem solid var(--cb2);
+  border-bottom: 0.1rem solid var(--cb2);
   
   .logo {
     width: 5rem;
@@ -330,17 +322,17 @@ nav.main-menu {
 
 .job-page-hero {
   display: grid;
-  grid-template-columns: 6rem 1fr;
+  grid-template-columns: 5rem 1fr;
   align-items: center;
   align-content: center;
-  gap: 1rem;
+  gap: 0.5rem 1rem;
   
   padding: 1rem 0 2rem 0;
   border-bottom: 0.1rem solid var(--cb2);
     
   .logo {
-    width: 6rem;
-    height: 6rem;
+    width: 5rem;
+    height: 5rem;
     object-fit: contain;
     background: #ffffff;
     border-radius: 0.2rem;
@@ -350,7 +342,6 @@ nav.main-menu {
   }
   
   h1 {
-    font-size: 1.2rem;
     align-self: center;
   }
   
@@ -367,29 +358,41 @@ nav.main-menu {
 }
 
 .job-page-actions {
-  display: grid;
-  justify-items: start;
-  gap: 1rem;
-  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+  border-bottom: 0.1rem solid var(--cb2);
   
-  .match-score {
-    display: grid;
-    grid-template-columns: auto 1fr;
+  &>div {  
+    display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 0.5rem 0.75rem;
-    border: 0.3rem solid var(--cp);
-    border-radius: 0.2rem;
+    padding: 0.5rem 0;
+    padding-bottom: 1.5rem;
+  }
+  
+  .match-score {
+    display: inline-flex;
+    gap: 0rem;
+    border-radius: 7rem;
+    background: var(--cb2);
+    color: var(--cp);
+    height: 4rem;
+    width: 4rem;
+    align-items: center;
+    justify-content: center;
+    border: 0.25rem solid var(--cb3);
   }
   
   .match-score span {
-    font-size: 1.66rem;
+    font-size: 1.2rem;
     font-weight: 900;
   }
   
   .match-score em {
-    font-size: 0.8rem;
+    font-size: 0.4rem;
   }
+
 }
 
 .profile-resume {
