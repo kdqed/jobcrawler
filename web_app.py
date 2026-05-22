@@ -29,12 +29,21 @@ ROUTE_MAP = {
     '/logout': 'logout',
     '/upload-resume': 'upload_resume',
     
+    '/custom-resumes': 'custom_resumes',
+    '/starred': 'starred',
+    '/applied': 'applied',
+    
     '/job/<job_id>': 'job_page',
     '/customize-resume/<job_id>': 'customize_resume',
     '/raw-pdf-resume': 'raw_pdf_resume',
     '/download-custom-resume/<job_id>': 'download_custom_resume',
     
     '/job-expired/<job_id>': 'job_expired',
+    '/star-job/<job_id>': 'star_job',
+    '/unstar-job/<job_id>': 'unstar_job',
+    '/mark-applied/<job_id>': 'mark_applied',
+    '/mark-unapplied/<job_id>': 'mark_unapplied',
+
 }
 
 for path, module_name in ROUTE_MAP.items():

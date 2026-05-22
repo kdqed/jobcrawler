@@ -49,10 +49,7 @@ def handler(job_id):
         output_type = TextOutput(text_output_fn),
     )
     
-    user_job = UserJob.select(
-        user_id = request.user.id,
-        job_id = job.id
-    ).one()
+    user_job = UserJob.get_for_pair(request.user.id, job.id)
     
     if request.method == 'GET':
         if user_job:

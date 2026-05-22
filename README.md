@@ -9,15 +9,19 @@ x Sidebar With Application Flow with bottom hamburger on mobile, do mobile first
 x Letter for profile icon
 x UI improvements
 x Logo for dark theme
-- If resume already customized, say "View Custom Resume"
+x If resume already customized, say "View Custom Resume"
+x Star a job
+x Mark as Applied
+- Don't load all fields for job listing, fix in Idli
+- Do joins in Idli
 - List Custom Resumes
-- Star a job
-- Mark as Applied
+- Fix All Pages
+- Add back button
 - Replace Emojis with Icons
 - Confirmations Before Credit Spends
+- Loading Animations
 - Show JD Page in Iframe
 - Show Credit Usage Log
-- Fix All Pages
 
 - Handle Multiple Job Locations
 - Get board URLs from daily Google SERP
@@ -29,7 +33,7 @@ x Logo for dark theme
 - Country Filter
 - City Filter
 - Remote Filter
-- Weeks (Freshness) Sliding Filter (1,2,3,4,6, and 12 weeks)
+- Weeks (Freshness) Sliding Filter (0,1,2,3,4,6, and 12 weeks)
 
 - Move deleted jobs to separate table and show similar jobs on 404 page
 - Userwise Rate Limit Credit Use or just do a credit use lock
@@ -37,12 +41,12 @@ x Logo for dark theme
 - Move prototype to main domain
 - Roll out on PM x USDC group
 
-- Don't load all fields for job listing, fix in Idli
 - Attempt to Show Apply Page in iframe; try to auto-fill and submit with User IP
 - Track applications as applied etc. (Kanban style)
+- Daily Email With Recommended Jobs (ask for location filter in profile)
 
 - Tinker and select best AI Models
-- Use Starred Jobs for showing User Job Feed
+- Use Starred Jobs' vectors matching and show similar jobs.
 - Revise credits for actions, make them easily changeable in code
 - Email login
 - Use JSON Resume for resume processing

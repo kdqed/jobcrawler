@@ -2,7 +2,7 @@ from flask import abort, redirect, render_template, request
 from idli import VNN
 import numpy as np
 
-from db import Job, UserResume
+from db import Job, UserJob, UserResume
 from web_utils import wrap
 
 
@@ -38,6 +38,7 @@ def handler(job_id):
     
     similar_jobs = job.get_similar_jobs()
     resume = UserResume.select(id=request.user.id).one()
+    user_job = UserJob.get_for_pair(request.user.id, job.id)
     
     if resume:
         cos_sim = pg_cosine_distance(job.pplx_vec, resume.pplx_vec)
@@ -48,5 +49,10 @@ def handler(job_id):
             cos_sim = pg_cosine_distance(s_job.pplx_vec, resume.pplx_vec)
             raw_score = (cos_sim/2) ** 2
             s_job.match_score = round(100*(1-raw_score))
+    
         
-    return wrap(render_template('job_page.html', job=job, similar_jobs=similar_jobs))
+    return wrap(render_template('job_page.html', 
+        job = job, 
+        user_job = user_job, 
+        similar_jobs = similar_jobs,
+    ))

@@ -262,6 +262,15 @@ class UserJob:
         unsafe_html = mistune.html(self.cr_markdown_content)
         safe_html = nh3.clean(unsafe_html)
         return safe_html
+    
+    
+    @classmethod
+    def get_for_pair(cls, user_id: str, job_id: str):
+        existing = cls.select(user_id = user_id, job_id = job_id).one()
+        if existing:
+            return existing
+        else:
+            return cls(user_id = user_id, job_id = job_id)
 
 
 # Deprecated
