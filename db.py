@@ -140,7 +140,10 @@ class Job:
     
     def get_similar_jobs(self, count=10):
         vec = self.pplx_vec.tolist()
-        jobs = list(Job.select().order_by(VNN.cos('pplx_vec', vec))[1:count+1])
+        jobs = list(Job.select().only(
+            'id', 'title', 'org_logo', 'org_name',
+            'loc_locality', 'date_posted', 'pplx_vec',
+        ).order_by(VNN.cos('pplx_vec', vec))[1:count+1])
         return jobs
         
 

@@ -1,7 +1,14 @@
 <div class="content">
   <section>
-    <h1>Starred Jobs</h1>
+    <h1>Applied Jobs</h1>
     {% if jobs %}
+    <section class="jobs-list">
+      {% for job in jobs %}
+        {% with job=job %}
+          {% include 'components/job_link_card.html' %}
+        {% endwith %}
+      {% endfor %}
+    </section>
     {% else %}
     <p>
       <em>

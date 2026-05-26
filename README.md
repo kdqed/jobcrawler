@@ -12,15 +12,15 @@ x Logo for dark theme
 x If resume already customized, say "View Custom Resume"
 x Star a job
 x Mark as Applied
-- Don't load all fields for job listing, fix in Idli
-- Do joins in Idli
-- List Custom Resumes
-- Fix All Pages
-- Add back button
+x Do joins in Idli
+x List Custom Resumes
+x Fix All Pages
+x Don't load all fields for job listing, fix in Idli
+x Add back button
+
 - Replace Emojis with Icons
 - Confirmations Before Credit Spends
 - Loading Animations
-- Show JD Page in Iframe
 - Show Credit Usage Log
 
 - Handle Multiple Job Locations
@@ -41,7 +41,8 @@ x Mark as Applied
 - Move prototype to main domain
 - Roll out on PM x USDC group
 
-- Attempt to Show Apply Page in iframe; try to auto-fill and submit with User IP
+- Pagination everywhere
+- Auto-fill / Auto-apply with Extension
 - Track applications as applied etc. (Kanban style)
 - Daily Email With Recommended Jobs (ask for location filter in profile)
 
