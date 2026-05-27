@@ -1,5 +1,8 @@
 # Jobcrawler
 
+https://replicate.com/retro-diffusion/rd-fast
+
+
 ## TODO
 
 x 10 Credits For Customize Resume
@@ -18,16 +21,17 @@ x Fix All Pages
 x Don't load all fields for job listing, fix in Idli
 x Add back button
 
-- Replace Emojis with Icons
+x Replace Emojis with Icons
 - Confirmations Before Credit Spends
 - Loading Animations
 - Show Credit Usage Log
+- Fix is_partial in Idli
 
-- Handle Multiple Job Locations
 - Get board URLs from daily Google SERP
 - Get Jobs from boards
-- Keep jobs synced to make sure they are not expired
 - nh3 clean all fields on job data JSON
+- Handle Multiple Job Locations
+- Keep jobs synced to make sure they are not expired
 - Cache company logos
 
 - Country Filter
@@ -45,6 +49,7 @@ x Add back button
 - Auto-fill / Auto-apply with Extension
 - Track applications as applied etc. (Kanban style)
 - Daily Email With Recommended Jobs (ask for location filter in profile)
+- One click search company related profiles on LinkedIn / X.com
 
 - Tinker and select best AI Models
 - Use Starred Jobs' vectors matching and show similar jobs.

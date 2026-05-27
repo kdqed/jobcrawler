@@ -1,11 +1,14 @@
 <div class="content">
   {% if request.user %}
     {% if customized %}
-      <h1>Curated Jobs For {{request.user.name}}</h1>
+      <h1>
+        <img src="/static/icons/target.png">
+        <span>Curated Jobs For {{request.user.name}}</span>
+      </h1>
     {% else %}
       <h1>Latest Jobs</h1>
       <p>
-        💡We can create a customized job feed matching your resume!
+        We can create a customized job feed matching your resume!
       </p>
       <p>
         <a href="/profile#resumeupload" class="clk-solid">

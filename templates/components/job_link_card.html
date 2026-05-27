@@ -5,10 +5,22 @@
   </div>
   <div class="attr">
     {% if job.match_score %}
-      <em>🌟 {{job.match_score}}% Match</em>
+      <span>
+        <img src="/static/icons/target.png">
+        <em>{{job.match_score}}%</em>
+      </span>
     {% endif %}
-    <em>👥 {{job.org_name}}</em>
-    <em>📍 {{job.loc_locality}}</em>
-    <em>🗓️ {{job.fmt_time_ago}}</em>
+    <span>
+      <img src="/static/icons/org.png">
+      <em>{{job.org_name}}</em>
+    </span>
+    <span>
+      <img src="/static/icons/location.png">
+      <em>{{job.loc_locality}}</em>
+    </span>
+    <span>
+      <img src="/static/icons/calendar.png">
+      <em>{{job.fmt_time_ago}}</em>
+    </span>
   </div>
 </a>

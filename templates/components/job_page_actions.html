@@ -1,41 +1,60 @@
 <div class="job-page-actions">
   <div>
     {% if not user_job.applied_at %}
-    <a href="{{job.url}}" class="clk-solid" target="_blank">Apply Now</a>
+    <a href="{{job.url}}" class="clk-solid" target="_blank">
+      <span>Apply Now</span>
+      <img src="/static/icons/right.png">
+    </a>
     {% endif %}
     
     {% if user_job.applied_at %}
     <form action="/mark-unapplied/{{job.id}}" method="POST">
       <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
-      <button class="clk-solid">Applied ❌</button>
+      <button class="clk-solid">
+        <img src="/static/icons/checkmark.png">
+        <span>Applied</span>
+      </button>
     </form>
     {% else %}
     <form action="/mark-applied/{{job.id}}" method="POST">
       <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
-      <button class="clk-solid">✅ Mark As Applied</button>
+      <button class="clk-solid">
+        <img src="/static/icons/checkmark.png">
+        <span>Mark As Applied</span>
+      </button>
     </form>
     {% endif %}
     
     {% if user_job.starred_at %}
     <form action="/unstar-job/{{job.id}}" method="POST">
       <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
-      <button class="clk-solid">⭐ Starred</button>
+      <button class="clk-solid">
+        <img src="/static/icons/star.png">
+        <span>Starred</span>
+      </button>
     </form>
     {% else %}
     <form action="/star-job/{{job.id}}" method="POST">
       <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
-      <button class="clk-solid">⭐ Star</button>
+      <button class="clk-solid">
+        <img src="/static/icons/star.png">
+        <span>Star</span>
+      </button>
     </form>
     {% endif %}
     
     {% if user_job.cr_generated_at %}
     <a href="/customize-resume/{{job.id}}" class="clk-solid">
-      View Custom Resume
+      <img src="/static/icons/doc-spanner.png">
+      <span>View Custom Resume</span>
     </a>
     {% else %}
     <form action="/customize-resume/{{job.id}}" method="POST">
       <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
-      <button class="clk-solid">✨ Customize Resume</button>
+      <button class="clk-solid">
+        <img src="/static/icons/doc-spanner.png">
+        <span>Customize Resume</span>
+      </button>
     </form>
     {% endif %}
     
