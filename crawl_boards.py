@@ -27,7 +27,7 @@ while True:
         continue
     
     logging.info(f'Crawling {board.url}')
-    response = niquests.get(board.url, headers={'User-Agent': 'googlebot'})
+    response = niquests.get(board.url, headers={'User-Agent': 'xwbot'})
     
     if board.url == response.url:
         job_urls = parsers[board.src].parse_board(board.url, response.content)

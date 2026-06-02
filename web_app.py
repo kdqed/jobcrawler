@@ -28,6 +28,7 @@ ROUTE_MAP = {
     '/profile': 'profile',
     '/logout': 'logout',
     '/upload-resume': 'upload_resume',
+    '/credit-use-log': 'credit_use_log',
     
     '/custom-resumes': 'custom_resumes',
     '/starred': 'starred',

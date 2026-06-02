@@ -1130,6 +1130,19 @@ wheels = [
 ]
 
 [[package]]
+name = "html-to-markdown"
+version = "3.5.7"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/d3/e5/bc0e6e6787f49dd37953406941260bb7ed2f8de0c403d450d20b08a3901f/html_to_markdown-3.5.7.tar.gz", hash = "sha256:f2eb59a614830da827e6dcac0aa253d2613735cd104429323682751ecd79b0da", size = 4394226, upload-time = "2026-05-29T14:25:09.944Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/77/de/3ce5f55ae5163a2d53a616190a2c13d0cf3f96dad50e8c9804237f6f2baa/html_to_markdown-3.5.7-cp310-abi3-macosx_10_12_x86_64.whl", hash = "sha256:4641c566abff4a5faa5a49d2dc4b21b1bf73480f53f45eb9b45b1983fb0dea5d", size = 6092338, upload-time = "2026-05-29T14:25:02.282Z" },
+    { url = "https://files.pythonhosted.org/packages/0e/ca/89fd1ad259591656517a86e702e18c348b145fbc8550708bed9c4325bb58/html_to_markdown-3.5.7-cp310-abi3-macosx_11_0_arm64.whl", hash = "sha256:0c253e440864a01519031073a534b3838393f6aea6f88957bdf3546f3ee97325", size = 5736293, upload-time = "2026-05-29T14:25:03.962Z" },
+    { url = "https://files.pythonhosted.org/packages/f0/f1/585666b4665156fe2c6183e5a5ca8c512822a1c2c9757ae6ce4b281f735c/html_to_markdown-3.5.7-cp310-abi3-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:f7c9f67c84abb1b86858743b6caed4e714dc32cc4e0ed28bd31aa17ed74eb30e", size = 5890957, upload-time = "2026-05-29T14:25:05.453Z" },
+    { url = "https://files.pythonhosted.org/packages/61/31/e6d7bb7de03570d4622790e90b6519ddac1ee7c943cc3e9eb73327dd8272/html_to_markdown-3.5.7-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:0b35cd7e8d0b7687f2c974f8fcaf962c3965248bcfcee740858a2a33833fb67b", size = 6262247, upload-time = "2026-05-29T14:25:08.546Z" },
+    { url = "https://files.pythonhosted.org/packages/ed/7e/26a0a7b74fcffe5e9f3c0a648888bb59aad1bc2efff290e99e4469502d5f/html_to_markdown-3.5.7-cp310-abi3-win_amd64.whl", hash = "sha256:a0eaa429bd3a5b5301a60fde594288c9624ab7791a2f356af4f7b5495b756094", size = 6285999, upload-time = "2026-05-29T14:25:06.984Z" },
+]
+
+[[package]]
 name = "html5lib"
 version = "1.1"
 source = { registry = "https://pypi.org/simple" }
@@ -1253,16 +1266,16 @@ wheels = [
 
 [[package]]
 name = "idli"
-version = "0.2.4"
+version = "0.2.7"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "pgvector" },
     { name = "psycopg", extra = ["binary"] },
     { name = "psycopg-pool" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/a7/73/254d63407a3ac5270353f8e8fc361d46c4fcb7be553c9c74063fc3583668/idli-0.2.4.tar.gz", hash = "sha256:f504dbfaf1a20dec43632af443d2e48d121aebdc20173db42ac042df15a77e4a", size = 28988, upload-time = "2026-05-26T08:44:24.295Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/fc/81/8540a8f6c2db49e690eb9b028e118b3a5d6a70ace8325ca172d985e11ee2/idli-0.2.7.tar.gz", hash = "sha256:8338b9d639ae06559a9b7455398b33daa900ca50acf47535fc8fc1b50a4d39b9", size = 29044, upload-time = "2026-06-02T03:54:26.834Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/4c/ca/8d027e9d991633ba98339337917c9eadbc4c34cbe6c1a36f7faa09af3ad5/idli-0.2.4-py3-none-any.whl", hash = "sha256:db7e2fecde7ad6c6cc0065b419dc4ab5dd259fcff38f15c7434723a5b900576d", size = 12256, upload-time = "2026-05-26T08:44:25.334Z" },
+    { url = "https://files.pythonhosted.org/packages/33/bb/9089f1f19d9eaba34b3b3472a57983a300e3e1a8a00a793f586c2a207582/idli-0.2.7-py3-none-any.whl", hash = "sha256:5aca5fa781c8bbc95abf6898cc90c4cd0530d2d4a792840bd0ce80bcd685ad1f", size = 12287, upload-time = "2026-06-02T03:54:25.463Z" },
 ]
 
 [[package]]
@@ -1491,6 +1504,7 @@ dependencies = [
     { name = "google-api-python-client" },
     { name = "google-auth-oauthlib" },
     { name = "gunicorn" },
+    { name = "html-to-markdown" },
     { name = "html5lib" },
     { name = "idli" },
     { name = "markitdown", extra = ["pdf"] },
@@ -1521,8 +1535,9 @@ requires-dist = [
     { name = "google-api-python-client", specifier = ">=2.193.0" },
     { name = "google-auth-oauthlib", specifier = ">=1.3.1" },
     { name = "gunicorn", specifier = ">=25.3.0" },
+    { name = "html-to-markdown", specifier = ">=3.5.7" },
     { name = "html5lib", specifier = ">=1.1" },
-    { name = "idli", specifier = ">=0.2.3" },
+    { name = "idli", specifier = ">=0.2.7" },
     { name = "markitdown", extras = ["pdf"], specifier = ">=0.1.5" },
     { name = "mistune", specifier = ">=3.2.1" },
     { name = "nh3", specifier = ">=0.3.5" },

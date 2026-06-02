@@ -67,6 +67,24 @@
   <main>
     {{content | safe}}
   </main>
-
+  
+  <script>
+    function confirmBeforeSubmit(event) {
+      const confirmation = window.confirm("This action will cost you 10 credits. Continue?");
+      if(confirmation) {
+        document.querySelector('#loading-block').style.display = 'grid';
+        return true;
+      } else {
+        return false;
+      }
+    }
+  </script>
+  
+  <div id="loading-block">
+    AI Is Working
+    <br>
+    Please Wait...
+  </div>
+    
 </body>
 </html>

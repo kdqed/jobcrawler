@@ -36,7 +36,7 @@ while True:
     for i in range(1):
         try:
             time.sleep(1)
-            response = niquests.get(job_url.url, headers={'User-Agent': 'googlebot'})
+            response = niquests.get(job_url.url, headers={'User-Agent': 'xwbot'})
     
             if job_url.url == response.url:
                 result = parsers[job_url.src].parse_job(job_url.url, response.content)
@@ -57,3 +57,4 @@ while True:
 
     job_url.crawled_at = datetime.now()
     job_url.save()
+    

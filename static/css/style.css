@@ -155,6 +155,7 @@ main {
   grid-area: 1 / 2 / 3 / 3;
   display: grid;
   grid-template-columns: 1fr;
+  align-content: start;
   gap: 1rem;
   padding: 1rem;
   overflow-y: scroll;
@@ -162,8 +163,8 @@ main {
   
   .content {
     display: grid;
-    max-width: 100vh;
     width: 100%;
+    max-width: 100vh;
     padding: 0;
     padding-right: 1rem;
     gap: 1rem;
@@ -247,11 +248,27 @@ nav.main-menu {
   }
 }
 
+section {
+  max-width: 100%;
+}
+
 section>h1 {
   margin-bottom: 1rem;
 }
 
 /* --- 4. COMPONENTS --- */
+ol {
+  list-style-position: inside;
+}
+
+ul {
+  list-style-position: inside;
+}
+
+li>p {
+  display: inline;
+}
+
 .clk-inline {
   color: var(--ca);
   display: inline-flex;
@@ -348,6 +365,22 @@ section>h1 {
       border-color: var(--ca);
     }
   }
+}
+
+#loading-block {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0 , 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  display: grid;
+  display: none;
+  place-content: center;
 }
 
 /* --- 5. PAGE-SPECIFIC --- */
@@ -458,9 +491,52 @@ section>h1 {
 
 }
 
+.job-page-description>* {
+  margin: 1rem 0;
+}
+
 .profile-resume {
   iframe.current-resume {
     width: 100%;
     height: 100vh;
   }
+}
+
+
+.credit-use-log .table-container {
+  max-width: calc(100vw - 17rem);
+  overflow-x: auto;
+  
+  @media screen and (max-width: 720px) {
+    & {
+      max-width: calc(100vw - 2rem);
+    }
+  }
+}
+
+
+.credit-use-log table {
+  border-collapse: collapse;
+  max-width: 100%;
+}
+
+.credit-use-log th {
+  background: var(--cb2);
+  border-top: 0.1rem solid var(--cb3);
+  border-bottom: 0.1rem solid var(--cb3);
+  text-align: left;
+  color: var(--ca);
+  padding: 0.7rem 1rem;
+}
+
+.credit-use-log td {
+  border-bottom: 0.1rem solid var(--cb3);
+  padding: 0.7rem 1rem;
+  white-space: nowrap;
+}
+
+.credit-use-log td img {
+  height: 1.2rem;
+  width: 1.2rem;
+  vertical-align: -0.24rem;
 }

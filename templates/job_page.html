@@ -21,7 +21,7 @@
       </span>
       <span>
         <img src="/static/icons/location.png">
-        <em>{{job.loc_locality}}</em>
+        <em>{{job.loc_str}}</em>
       </span>
       <span>
         <img src="/static/icons/calendar.png">
@@ -33,9 +33,7 @@
     {% include "components/job_page_actions.html" %}
   </section>
   <section class="job-page-description">
-    {% for line in job.description.split("\n") %}
-      <p>{{line}}</p>
-    {% endfor %}
+    {{ job.description | safe }}
   </section>
   <section>
     {% include "components/job_page_actions.html" %}

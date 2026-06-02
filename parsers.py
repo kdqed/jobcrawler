@@ -1,4 +1,5 @@
 from datetime import datetime
+import html
 import json
 import re
 from urllib.parse import urljoin
@@ -6,14 +7,23 @@ from w3lib.html import get_base_url
 
 from bs4 import BeautifulSoup
 import extruct
+from html_to_markdown import convert as html_to_md
+import mistune
+import nh3
 
 
-HTML_TAG_RE = re.compile(r"<[^>]+>")
-def _strip_tags(text):
+def _sanitize_jd(text):
     if not text:
         return ""
-    text = text.replace("&nbsp;", " ")
-    return HTML_TAG_RE.sub("", text)
+    
+    result = ''
+    for chunk in text.split('\n'):
+        result += html_to_md(chunk).content + '\n'
+    
+    result = result.replace('\\n', '\n')
+    result = mistune.html(result)
+    result = nh3.clean(result)
+    return result
 
 
 class Generic:
@@ -39,31 +49,19 @@ class Generic:
         for d in edata.get('json-ld', []):
             if d.get('@type') == 'JobPosting':
                 result['raw_content'] = json.dumps(d)
-                result['title'] = d['title']
-                result['org_name'] = d['hiringOrganization']['name']
+                result['title'] = html.unescape(d['title'])
+                result['org_name'] = html.unescape(d['hiringOrganization']['name'])
                 result['org_logo'] = d['hiringOrganization'].get('logo')
                 if d.get('jobLocationType', '')=='telecommute':
                     result['is_remote'] = True
-                    result['loc_locality'] = None
-                    result['loc_region'] = None
-                    result['loc_country'] = None
-                    result['loc_postcode'] = None
+                    result['loc_json'] = None
                 else:    
                     result['is_remote'] = False
-                    job_location = d.get('jobLocation')
-                    if type(job_location) is list:
-                        job_location = (job_location or [{}])[0]
-                    elif type(job_location) is None:
-                        job_location = {}
-                    address = job_location.get('address', {})
-                    result['loc_locality'] = address.get('addressLocality')
-                    result['loc_region'] = address.get('addressRegion')
-                    result['loc_country'] = address.get('addressCountry')
-                    result['loc_postcode'] = address.get('postalCode')
+                    result['loc_json'] = json.dumps(d.get('jobLocation'))
                 result['employment_type'] = (d.get('employmentType') or '').lower() or None
                 result['date_posted'] = datetime.fromisoformat(d['datePosted'])
                 result['valid_through'] = datetime.fromisoformat(d['validThrough']) if 'validThrough' in d else None
-                result['description'] = _strip_tags(d.get('description'))
+                result['description'] = _sanitize_jd(d.get('description'))
                 return result
 
         raise Exception('No Job Schema')

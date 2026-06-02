@@ -1,0 +1,34 @@
+<div class="content">
+  <section>
+    <a href="javascript:history.back()" class="clk-inline">
+      <img src="/static/icons/left.png"
+      <span>Back</span>
+    </a>
+  </section>
+  <section class="credit-use-log">
+    <h1>Credit Use Log</h1>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Credits</th>
+            <th>Note</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for log in use_log %}
+          <tr>
+            <td>{{log.time_ago}}</td>
+            <td>
+              <img src="/static/icons/credits.png">
+              <span>{{log.credits}}</span>
+            </td>
+            <td>{{log.note_simple}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>

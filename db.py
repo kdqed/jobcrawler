@@ -2,7 +2,7 @@ from datetime import datetime
 import json
 from uuid import UUID
 
-from idli import AutoUUID, BTreeIndex, Connection, HNSWIndex, Vector, VNN
+from idli import AutoUUID, BTreeIndex, Connection, HNSWIndex, PrimaryKey, Vector, VNN
 import jwt
 import mistune
 import nh3
@@ -90,6 +90,7 @@ class Job:
     org_name: str
     org_logo: str | None
     is_remote: bool
+    loc_json: str | None
     loc_locality: str | None
     loc_region: str | None
     loc_country: str | None
@@ -120,9 +121,9 @@ class Job:
 
         for key in [
             'title', 'org_name', 'org_logo', 'is_remote',
-            'loc_locality', 'loc_region', 'loc_country', 'loc_postcode',
+            'loc_json',
             'employment_type', 'date_posted', 'valid_through', 'description',
-            'match_vec', 'pplx_vec',
+            'pplx_vec',
         ]:
             setattr(job, key, details[key])
         
@@ -134,20 +135,112 @@ class Job:
         return to_time_ago(self.date_posted)
     
     
+    @property
+    def loc_str(self):
+        if not self.loc_json:
+            return 'Unknown'
+        loc = json.loads(self.loc_json)
+        if type(loc) is dict:
+            loc = [loc]
+        
+        places = []
+        for obj in loc:
+            addr = obj['address']
+            names = [
+                addr.get('addressLocality'),
+                addr.get('addressRegion'),
+                addr.get('addressCountry'),
+            ]
+            places.append(', '.join([n for n in names if n]))
+            
+        places = [p for p in places if p]
+        if not places:
+            return "Unknown"
+        return " / ".join(places)
+    
+    
     def is_still_live(self):
         r = niquests.head(self.url)
         return r.status_code == 200
+    
     
     def get_similar_jobs(self, count=10):
         vec = self.pplx_vec.tolist()
         jobs = list(Job.select().only(
             'id', 'title', 'org_logo', 'org_name',
-            'loc_locality', 'date_posted', 'pplx_vec',
+            'loc_json', 'date_posted', 'pplx_vec',
         ).order_by(VNN.cos('pplx_vec', vec))[1:count+1])
         return jobs
+    
+    
+    def archive(self):
         
+        a_job = ArchivedJob(
+            id = self.id,
+            url = self.url,
+            src = self.src,
+            
+            indexed_at = self.indexed_at,
+            archived_at = datetime.now(),
+            
+            title = self.title,
+            org_name = self.org_name,
+            org_logo = self.org_logo,
+            is_remote = self.is_remote,
+            loc_json = self.loc_json,
+            
+            employment_type = self.employment_type,
+            date_posted = self.date_posted,
+            valid_through = self.valid_through,
+            description = self.description,
+            
+            pplx_vec = self.pplx_vec,
+        )
+        
+        a_job.save()
+        self.delete()
+        
+        
+@db.Model
+class ArchivedJob:
+    id: UUID
+    url: str
+    src: str
+
+    indexed_at: datetime
+    archived_at: datetime
+
+    title: str
+    org_name: str
+    org_logo: str | None
+    is_remote: bool
+    loc_json: str | None
+    employment_type: str | None
+    date_posted: datetime
+    valid_through: datetime | None
+    description: str
+
+    pplx_vec: Vector(1024) | None
 
 
+@db.Model
+class JobLoc:
+    job_id: UUID
+    loc_tag: str
+    
+    __idli__ = [
+        PrimaryKey('loc_tag', 'job_id')
+    ]
+    
+    @classmethod
+    def add_tag(cls, job_id, loc_tag):
+        existing = cls.select(job_id=job_id, loc_tag=loc_tag).one()
+        if not existing:
+            new_obj = cls(job_id=job_id, loc_tag=loc_tag)
+            new_obj.save()
+    
+    
+    
 @db.Model
 class ClientUser:
     id: UUID = AutoUUID
@@ -240,7 +333,6 @@ class UserResume:
     def updated_time_ago(self):
         return to_time_ago(self.updated)
 
-        
 
 @db.Model    
 class UserJob:
@@ -306,3 +398,20 @@ class CreditUseLog:
     credits: int
     note: str
     api_usage: str
+    
+    __idli__ = [
+        BTreeIndex('user_id', '-timestamp')
+    ]
+    
+    @property
+    def time_ago(self):
+        return to_time_ago(self.timestamp)
+        
+    
+    @property
+    def note_simple(self):
+        note_type = self.note.split(':')[0]
+        if note_type == 'CUSTOMIZE_RESUME':
+            return 'Resume Customization'
+        
+        return note_type

@@ -11,16 +11,16 @@
       </span>
     {% endif %}
     <span>
+      <img src="/static/icons/calendar.png">
+      <em>{{job.fmt_time_ago}}</em>
+    </span>
+    <span>
       <img src="/static/icons/org.png">
       <em>{{job.org_name}}</em>
     </span>
     <span>
       <img src="/static/icons/location.png">
-      <em>{{job.loc_locality}}</em>
-    </span>
-    <span>
-      <img src="/static/icons/calendar.png">
-      <em>{{job.fmt_time_ago}}</em>
+      <em>{{job.loc_str}}</em>
     </span>
   </div>
 </a>

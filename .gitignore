@@ -14,3 +14,4 @@ workdir/
 .env
 google_oauth_client.json
 todo.md
+tinker.py

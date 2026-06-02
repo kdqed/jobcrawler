@@ -14,7 +14,7 @@ def handler():
         vec = resume.pplx_vec.tolist()
         jobs = list(Job.select().only(
             'id', 'title', 'org_logo', 'org_name', 
-            'loc_locality', 'date_posted',
+            'loc_json', 'date_posted',
         ).order_by(VNN.cos('pplx_vec', vec))[:50])
         
         for job in jobs:
@@ -23,6 +23,6 @@ def handler():
         return wrap(render_template('home.html', jobs=jobs, customized=True))
     else:
         jobs = Job.select().only(
-            'id', 'title', 'org_logo', 'org_name', 'loc_locality', 'date_posted'
+            'id', 'title', 'org_logo', 'org_name', 'loc_json', 'date_posted'
         ).order_by('-date_posted')[:50]
         return wrap(render_template('home.html', jobs=jobs, customized=False))

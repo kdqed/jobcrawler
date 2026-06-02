@@ -22,23 +22,25 @@ x Don't load all fields for job listing, fix in Idli
 x Add back button
 
 x Replace Emojis with Icons
-- Confirmations Before Credit Spends
-- Loading Animations
-- Show Credit Usage Log
-- Fix is_partial in Idli
+x Show Credit Usage Log
+x Confirmations Before Credit Spends
+x Loading Animations
+x Fix is_partial in Idli
 
-- Get board URLs from daily Google SERP
-- Get Jobs from boards
-- nh3 clean all fields on job data JSON
-- Handle Multiple Job Locations
-- Keep jobs synced to make sure they are not expired
-- Cache company logos
+x Get Jobs from boards
+x nh3 clean all fields on job data JSON
 
+x Handle Multiple Job Locations
+- Add Location Tagging to Crawler
 - Country Filter
 - City Filter
 - Remote Filter
-- Weeks (Freshness) Sliding Filter (0,1,2,3,4,6, and 12 weeks)
+- Weeks (Freshness) Dropdown (1, 2, 4, 12 weeks)
 
+- Keep jobs synced to make sure they are not expired
+- Get Lever Category
+- Cache company logos
+- Move custom resumes to bucket
 - Move deleted jobs to separate table and show similar jobs on 404 page
 - Userwise Rate Limit Credit Use or just do a credit use lock
 - Show Roadmap on main domain
