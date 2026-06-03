@@ -44,7 +44,8 @@ ROUTE_MAP = {
     '/unstar-job/<job_id>': 'unstar_job',
     '/mark-applied/<job_id>': 'mark_applied',
     '/mark-unapplied/<job_id>': 'mark_unapplied',
-
+    
+    '/location-autocomplete': 'location_autocomplete',
 }
 
 for path, module_name in ROUTE_MAP.items():

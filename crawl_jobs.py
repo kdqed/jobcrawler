@@ -6,7 +6,8 @@ import traceback
 
 import niquests
 
-from db import JobUrl, Job
+from db import JobUrl, Job, JobLoc
+import loc_utils
 import ml_utils
 from parsers import parsers
 
@@ -46,6 +47,11 @@ while True:
                     src = job_url.src,
                     details = result,
                 )
+                job = Job.select(url = job_url.url).one()
+                loc_tags = loc_utils.get_location_tags(job.loc_json, job_url.src)
+                for loc_tag in loc_tags:
+                    print(job.id, loc_tag)
+                    JobLoc.add_tag(job.id, loc_tag)
             else:
                 logging.info("redirected: " + response.url)
             break
@@ -57,4 +63,5 @@ while True:
 
     job_url.crawled_at = datetime.now()
     job_url.save()
+  
     

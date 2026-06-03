@@ -31,22 +31,22 @@ x Get Jobs from boards
 x nh3 clean all fields on job data JSON
 
 x Handle Multiple Job Locations
-- Add Location Tagging to Crawler
-- Country Filter
-- City Filter
-- Remote Filter
-- Weeks (Freshness) Dropdown (1, 2, 4, 12 weeks)
+x Add Location Tagging to Crawler
+x Weeks (Freshness) Dropdown (1, 2, 4, 12 weeks)
+x Country Filter
+x City Filter
+x Remote Filter
 
-- Keep jobs synced to make sure they are not expired
-- Get Lever Category
 - Cache company logos
 - Move custom resumes to bucket
 - Move deleted jobs to separate table and show similar jobs on 404 page
-- Userwise Rate Limit Credit Use or just do a credit use lock
-- Show Roadmap on main domain
 - Move prototype to main domain
+- Show Roadmap on main domain
 - Roll out on PM x USDC group
 
+- Userwise Rate Limit Credit Use or just do a credit use lock
+- Keep jobs synced to make sure they are not expired
+- Get Lever Category
 - Pagination everywhere
 - Auto-fill / Auto-apply with Extension
 - Track applications as applied etc. (Kanban style)

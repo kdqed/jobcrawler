@@ -1,0 +1,57 @@
+alberta, Alberta, ca, ca-ab
+argentina, Argentina, ar
+arizona, Arizona, us, us-az
+atlanta, Atlanta, us, us-ga, us-atlanta
+bangalore, Bangalore, in, in-ka, in-bengaluru
+bengaluru, Bengaluru, in, in-ka, in-bengaluru, _t
+bogotá, Bogotá, co, co-bogota
+british colombia, British Colombia, ca, ca-bc
+buenos aires, Bueonos Aires, ar, ar-buenos-aires
+ca, California, us, us-ca
+calgary, Calgary, ca, ca-ab, ca-calgary
+california, California, us, us-ca
+canada, Canada, ca
+chandler, Chandler, us, us-az, us-chandler
+ciudad de méxico, Ciudad de México, mx, mx-cdmx
+colombia, Colombia, co
+dallas, Dallas, us, us-tx, us-dallas
+duluth, Duluth GA, us, us-ga, us-ga-duluth, _n
+duluth, Duluth MN, us, us-mn, us-mn-duluth
+edmonton, Edmonton, ca, ca-ab, ca-edmonton
+el segundo, El Segundo, us, us-ca, us-el-segundo
+ga, Georgia US, us, us-ga
+georgia, Georgia US, us, us-ga
+florida, Florida, us, us-fl
+houston, Houston, us, us-tx, us-houston
+india, India, in
+karnataka, Karnataka, in, in-ka
+kuala lumpur, Kuala Lumpur, my, my-kualalumpur
+ohio, Ohio, us, us-oh
+ontario, Ontario, ca, ca-on
+orlando, Orlando, us, us-fl, us-orlando
+malaysia, Malaysia, my
+mexico, México, mx
+miami, Miami, us, us-fl, us-miami
+minnesota, Minnesota, us-mn
+missouri, Missouri, us, us-mo
+mn, Minnesota, us-mn
+new jersey, New Jersey, us, us-nj
+new york, New York, us, us-ny, us-nyc
+new york state, New York State, us, us-ny
+north carolina, North Carolina, us, us-nc
+quebec, Quebec, ca, ca-qc
+remote uk, Remote UK, gb, gb-remote
+remote us, Remote USA, us, us-remote
+san francisco, San Francisco, us, us-ca, us-san-francisco
+santa barbara, Santa Barbara, us, us-ca, us-santa-barbara
+seattle, Seattle, us, us-wa, us-seattle
+singapore, Singapore, sg
+south carolina, South Carolina, us, us-sc
+texas, Texas, us, us-tx
+toronto, Toronto, ca, ca-on, ca-toronto
+uk, UK, gb
+ukraine, Ukraine, ua
+us, USA, us 
+vancouver, Vancouver, ca, ca-bc, ca-vancouver
+washington, Washington, us, us-wa
+westmount, Westmount, ca, ca-qc, ca-westmount

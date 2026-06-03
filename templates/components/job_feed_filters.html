@@ -1,3 +1,84 @@
 <div class="job-feed-filters">
-  Filters
+  <form action="/" method="GET" id="job-feed-filter-form" onsubmit="cancelSubmit(event)">
+    <input type="hidden" name="location_tag" value="{{location_tag}}">
+    <div id="location-input-container">
+      <span>
+        <img src="/static/icons/location.png" class="icon">
+      </span>
+      <input 
+        type="text"
+        name="location_name"
+        value="{{location_name or ''}}"
+        onfocus="clearLocationSearch()"
+        onkeydown="onLocationSearch(event)"
+      >
+      <div id="location-suggestions-box">
+        <div class="results"></div>
+        <p><em>Hint:</em> Type 'remote' for Remote Jobs</em></p>
+      </div>
+    </div>
+    <div>
+      <span>
+        <img src="/static/icons/calendar.png" class="icon">
+      </span>
+      <select name="freshness" onchange="submitFeedFilterForm()">
+        <option value="1" {% if freshness==1 %}selected{% endif %}>&lt 1 Week</option>
+        <option value="2" {% if freshness==2 %}selected{% endif %}>&lt 2 Weeks</option>
+        <option value="4" {% if freshness==4 %}selected{% endif %}>&lt 4 Weeks</option>
+        <option value="12" {% if freshness==12 %}selected{% endif %}>&lt 12 Weeks</option>
+        <option value="24" {% if freshness==24 %}selected{% endif %}>&lt 24 Weeks</option>
+      </select>
+    </div>
+  </form>
+  <script>
+  
+    let locationAutocompResults = [];
+    
+    function submitFeedFilterForm() {
+      document.querySelector("#job-feed-filter-form").submit();
+    }
+    
+    async function onLocationSearch(event) {
+      const form = document.querySelector("#job-feed-filter-form");
+      const inp = document.querySelector("#location-input-container input");
+      const tag = inp.value;
+      
+      if(event.keyCode == 13) {
+        const tagInput = form.querySelector('input[name=location_tag]');
+        tagInput.value = locationAutocompResults[0].tag
+        form.submit();
+        return;
+      }
+      
+      locationAutocompResults = [];
+      if(tag.length>1) {
+        const queryString = new URLSearchParams({tag}).toString();
+        const response = await fetch('/location-autocomplete?' + queryString);
+        locationAutocompResults = await response.json();
+      }
+      
+      const resultsBox = document.querySelector("#location-suggestions-box .results");
+      resultsBox.innerHTML = '';
+      for(let i=0; i<locationAutocompResults.length; i++) {
+        const r = document.createElement('div')
+        r.classList.add('result');
+        r.innerHTML = locationAutocompResults[i].name;
+        r.addEventListener('click', () => {
+          const tagInput = form.querySelector('input[name=location_tag]');
+          tagInput.value = locationAutocompResults[i].tag
+          form.submit();
+        });
+        resultsBox.appendChild(r);
+      }
+    }
+    
+    function clearLocationSearch() {
+      const inp = document.querySelector("#location-input-container input");
+      inp.value = '';
+    }
+    
+    function cancelSubmit(event) {
+      event.preventDefault();
+    }
+  </script>
 </div>
