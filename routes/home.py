@@ -14,7 +14,7 @@ def handler():
     
     weeks = int(request.args.get('freshness', '2'))
     newer_than = datetime.now() - timedelta(days = weeks * 7)
-    location_tag = request.args.get('location_tag', 'us')
+    location_tag = request.args.get('location_tag', 'in')
     location_name = loc_utils.get_name_by_tag(location_tag)
     
     filters = dict(
