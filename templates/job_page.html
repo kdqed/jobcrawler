@@ -6,7 +6,7 @@
     </a>
   </section>
   <section class="job-page-hero">
-    <img src="{{job.org_logo}}" class="logo"/>
+    <img src="{{job.org_logo_cdn_url}}" class="logo"/>
     <h1>{{job.title}}</h1>
     <div class="attr">
       {% if job.match_score %}
@@ -33,6 +33,7 @@
     {% include "components/job_page_actions.html" %}
   </section>
   <section class="job-page-description">
+    {{job.org_logo_cdn_path}}
     {{ job.description | safe }}
   </section>
   <section>

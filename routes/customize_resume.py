@@ -17,7 +17,7 @@ METHODS = ['GET', 'POST']
 
 def text_output_fn(x: str):
     return x
-
+    
 
 def handler(job_id):
     if not request.user:

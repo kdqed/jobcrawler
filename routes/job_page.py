@@ -42,12 +42,12 @@ def handler(job_id):
     
     if resume:
         cos_sim = pg_cosine_distance(job.pplx_vec, resume.pplx_vec)
-        user_score = (cos_sim/2) ** 2
+        user_score = (cos_sim/2) ** 1.3
         job.match_score = round(100*(1-user_score))
     
         for s_job in similar_jobs:
             cos_sim = pg_cosine_distance(s_job.pplx_vec, resume.pplx_vec)
-            raw_score = (cos_sim/2) ** 2
+            raw_score = (cos_sim/2) ** 1.3
             s_job.match_score = round(100*(1-raw_score))
     
         

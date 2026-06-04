@@ -48,10 +48,11 @@ while True:
                     details = result,
                 )
                 job = Job.select(url = job_url.url).one()
-                loc_tags = loc_utils.get_location_tags(job.loc_json, job_url.src)
+                loc_tags = loc_utils.get_location_tags(job.loc_json)
                 for loc_tag in loc_tags:
-                    print(job.id, loc_tag)
                     JobLoc.add_tag(job.id, loc_tag)
+                
+                job.upload_org_logo_to_cdn()
             else:
                 logging.info("redirected: " + response.url)
             break
@@ -63,5 +64,8 @@ while True:
 
     job_url.crawled_at = datetime.now()
     job_url.save()
+    
+    if '--one' in sys.argv:
+        break
   
     

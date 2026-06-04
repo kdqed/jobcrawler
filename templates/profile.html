@@ -33,6 +33,6 @@
       <input type="file" name="resume" accept=".pdf, .doc, .docx" required/>
     </label>
     <button type="submit" class="clk-solid">Upload</button>
-    <iframe src="/raw-pdf-resume" class="current-resume"></iframe>
+    <iframe src="{{resume.get_temp_access_url()}}" class="current-resume"></iframe>
   </form>
 </div>

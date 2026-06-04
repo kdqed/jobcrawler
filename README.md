@@ -37,13 +37,15 @@ x Country Filter
 x City Filter
 x Remote Filter
 
-- Cache company logos
-- Move custom resumes to bucket
-- Move deleted jobs to separate table and show similar jobs on 404 page
+x Cache company logos
+x Move custom resumes to bucket
 - Move prototype to main domain
-- Show Roadmap on main domain
 - Roll out on PM x USDC group
+- Fix early access flow
 
+- Put Loaders Thoroughly
+- Show Roadmap on main domain
+- Move deleted jobs to separate table and show similar jobs on 404 page
 - Userwise Rate Limit Credit Use or just do a credit use lock
 - Keep jobs synced to make sure they are not expired
 - Get Lever Category

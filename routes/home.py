@@ -10,7 +10,7 @@ from web_utils import wrap
 
 def handler():
     if not request.user:
-        return wrap(render_template('home.html'))
+        return render_template('landing.html')
     
     weeks = int(request.args.get('freshness', '2'))
     newer_than = datetime.now() - timedelta(days = weeks * 7)
@@ -29,11 +29,11 @@ def handler():
         vec = resume.pplx_vec.tolist()
         jobs = list(Job.select(**filters).only(
             'id', 'title', 'org_logo', 'org_name', 
-            'loc_json', 'date_posted',
+            'loc_json', 'date_posted', 'src', 'url'
         ).order_by(VNN.cos('pplx_vec', vec))[:50])
         
         for job in jobs:
-            user_score = (job.pplx_vec__vd__cos/2) ** 2
+            user_score = (job.pplx_vec__vd__cos/2) ** 1.3
             job.match_score = round(100*(1-user_score))
         return wrap(render_template('home.html',
             jobs = jobs, 
@@ -44,7 +44,8 @@ def handler():
         ))
     else:
         jobs = Job.select(**filters).only(
-            'id', 'title', 'org_logo', 'org_name', 'loc_json', 'date_posted'
+            'id', 'title', 'org_logo', 'org_name', 'loc_json', 
+            'date_posted', 'src', 'url',
         ).order_by('-date_posted')[:50]
         return wrap(render_template('home.html',
             jobs = jobs,

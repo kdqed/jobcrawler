@@ -9,6 +9,7 @@ import nh3
 import niquests
 
 import config
+import storage_utils
 
 db = Connection(config.DB_URI, sambar_dip=True, extensions=['pgvector'])
 
@@ -157,6 +158,39 @@ class Job:
         if not places:
             return "Unknown"
         return " / ".join(places)
+    
+    
+    @property
+    def org_logo_cdn_path(self):
+        if self.src == 'lever':
+            org_slug = self.url.split('/')[3]
+            return f'{self.src}/{org_slug}.png'
+        return ''
+            
+    
+    @property
+    def org_logo_cdn_url(self):
+        return '/'.join([
+            f'https://{config.S3_BUCKET}.{config.S3_ENDPOINT}',
+            config.ENV_TYPE,
+            'org_logos',
+            self.org_logo_cdn_path
+        ])
+    
+    
+    def upload_org_logo_to_cdn(self):
+        if not self.org_logo:
+            return
+        
+        key = 'org_logos/' + self.org_logo_cdn_path
+        key_exists = storage_utils.key_exists(key)
+        if key_exists:
+            return
+            
+        storage_utils.upload_org_logo(
+            url = self.org_logo,
+            obj_key = key,
+        )
     
     
     def is_still_live(self):
@@ -332,6 +366,22 @@ class UserResume:
     @property
     def updated_time_ago(self):
         return to_time_ago(self.updated)
+    
+    
+    @property
+    def cdn_url(self):
+        return '/'.join([
+            f'https://{config.S3_BUCKET}.{config.S3_ENDPOINT}',
+            config.ENV_TYPE,
+            'resumes',
+            self.filename
+        ])
+    
+    
+    def get_temp_access_url(self):
+        return storage_utils.get_temp_access_url(
+            f'resumes/{self.filename}'
+        )
 
 
 @db.Model    
@@ -357,6 +407,11 @@ class UserJob:
         unsafe_html = mistune.html(self.cr_markdown_content)
         safe_html = nh3.clean(unsafe_html)
         return safe_html
+
+    
+    @property
+    def cr_pdf_key(self):
+        return f'custom_resumes/{self.id}.pdf'
     
     
     @classmethod
@@ -383,11 +438,13 @@ class CustomizedResume:
         BTreeIndex('user_id', 'job_id')
     ]
     
+    
     @property
     def html_content(self):
         unsafe_html = mistune.html(self.markdown_content)
         safe_html = nh3.clean(unsafe_html)
         return safe_html
+        
 
         
 @db.Model

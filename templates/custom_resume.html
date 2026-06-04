@@ -5,7 +5,7 @@
     </p>
     <p>
       <form action="/customize-resume/{{job.id}}" method="POST">
-        <a href="/download-custom-resume/{{job.id}}" class="clk-solid">Download PDF</a>
+        <a href="/download-custom-resume/{{job.id}}" class="clk-solid" target="_blank">Download PDF</a>
         <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
         <button class="clk-solid">Redo Customize</button>
       </form>

@@ -1,0 +1,257 @@
+/* 
+1. VARIABLES & RESET
+2. BASE STYLES (Typography, Links)
+3. LAYOUT (Header, Footer)
+4. COMPONENTS (Buttons, Cards)
+5. PAGE-SPECIFIC STYLES
+*/
+
+/* --- 1. VARIABLES & RESET --- */
+:root {
+  --cp: #2c3e50;
+  --cb: #ffffff;
+  --cbt: #ffffff80;
+  --cb2: #efefef;
+  --cb3: #d0d0d0;
+  --ca: #106673;
+  --ca2: #08343b;
+  --ca3: #c3eff7;
+  --font-main: 'Figtree', sans-serif;
+  --base-size: clamp(16px, 1.4vw, 32px);
+  --max-width: 116vh;
+  font-size: var(--base-size);
+}
+
+.light-only {display: initial;}
+.dark-only {display: none;}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cp: #d1dce6;
+    --cb: #202425;
+    --cbt: #202425a0;
+    --cb2: #1b1e1f;
+    --cb3: #343940;
+    --ca: #5cacb8;
+    --ca2: #2b5b62;
+    --ca3: #1a373c;
+  }
+  
+  .light-only {display: none;}
+  .dark-only {display: initial;}
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* --- 2. BASE STYLES --- */
+body {
+  font-family: var(--font-main);
+  line-height: 1.6;
+  background: var(--cb);
+  color: var(--cp);
+  display: grid;
+  justify-items: center;
+}
+
+a {
+  color: inherit;
+}
+
+form {
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+}
+
+h2 {
+  width: 100%;
+  padding: 0.5rem 0;
+  color: var(--ca);
+}
+
+p {
+  margin: 0.5rem 0;
+}
+
+/* --- 3. LAYOUT --- */
+header {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+  padding: 1rem;
+  width: 100%;
+  align-items: center;
+  background: none;
+  
+  .home-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 0.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    
+    img {
+      height: 4rem;
+      width: auto;
+    }
+  }
+
+  .main-nav {
+    display: inline-flex;
+    gap: 0.25rem;
+    justify-items: center;
+    flex-direction: column;
+    
+    b {
+      font-size: 0.6rem;
+    }
+    
+    img {
+      height: 2rem;
+      width: auto;
+    }
+  }
+}
+
+main {
+  display: inline-flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--max-width);
+  min-height: 80vh;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+section {
+  padding: 1rem 0;
+}
+
+footer {
+  padding: 1rem;
+}
+
+/* --- 4. COMPONENTS --- */
+.clk-inline {
+  color: var(--ca);
+  display: inline-flex;
+  gap: 0.2rem;
+  align-items: center;
+  transform: translateY(0.25rem);
+  
+  img {
+    height: 1.2rem;
+    width: 1.2rem;
+  }
+  
+}
+
+.clk-solid {
+  display: inline-flex;
+  background: var(--ca3);
+  text-decoration: none;
+  border-radius: 0.2rem;
+  padding: 0.6rem 0.5rem 0.5rem 0.5rem;
+  height: 2.2rem;
+  align-content: center;
+  align-items: center;
+  color: var(--cp);
+  border: 0.1rem solid var(--ca2);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  gap: 0.3rem;
+  
+  img {
+    height: 1.3rem;
+    width: 1.3rem;
+    margin-bottom: 0.2rem;
+  }
+}
+
+
+/* --- 5. PAGE-SPECIFIC --- */
+/* Use prefixes to keep these isolated */
+.home-hero {
+  width: 100%;
+  padding: 10vh 0;
+  display: blcok;
+  text-align: center;
+  
+  p {
+    font-size: 1.3rem;
+  }
+
+  hgroup>img {
+    height: 7rem;
+    width: auto;
+    margin-bottom: 2rem;
+  }
+}
+
+.early-access-hero {
+  margin-top: 1.5rem;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.home-cards {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  
+  @media (orientation: portrait) {
+    grid-template-columns: 1fr;
+  }
+  
+  h2 {
+    grid-column: 1 / -1;
+    text-align: center;
+  }
+  
+  div {
+    background: var(--cb2);
+    padding: 1rem;
+    border: 1px solid var(--cb3);
+    border-radius: 0.2rem;
+    display: inline-block;
+  }
+  
+  h3 {
+    margin-bottom: 0.5rem;
+  }
+}
+
+#cover-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80vh;
+  z-index: -50;
+  
+  background: url('/static/clients/default_cover.png');
+  background-size: cover;
+  background-position: center;
+  image-rendering: pixelated;
+}
+
+#cover-tint {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80vh;
+  z-index: -50;
+  
+  background: linear-gradient(to bottom, var(--cbt), var(--cb));
+  
+}

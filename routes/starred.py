@@ -14,7 +14,7 @@ def handler():
             starred_at__neq = None,
         ))
     ]).only(
-        'id', 'title', 'org_logo', 'org_name', 'loc_json', 'date_posted'
+        'id', 'title', 'org_logo', 'org_name', 'loc_json', 'date_posted', 'src'
     )[:50]
 
     return wrap(render_template('starred.html', 

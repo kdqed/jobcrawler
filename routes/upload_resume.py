@@ -7,6 +7,7 @@ from werkzeug.utils import secure_filename
 
 from db import UserResume
 import ml_utils
+import storage_utils
 
 METHODS = ['POST']
 
@@ -28,12 +29,17 @@ def handler():
         
     sanitized_filename = secure_filename(resume_file.filename).replace('/', '_')
     resume.filename = f'{request.user.id}-{sanitized_filename}'
-    resume_file.save(resume_dir / resume.filename)
+    filepath = resume_dir / resume.filename
+    resume_file.save(filepath)
+    
+    storage_utils.upload_resume(filepath, resume.filename)
     
     md = MarkItDown(enable_plugins=True)
-    resume.markdown_content = md.convert(resume_dir / resume.filename).text_content
+    resume.markdown_content = md.convert(filepath).text_content
     resume.pplx_vec = ml_utils.vectorize(resume.markdown_content)
     resume.updated = datetime.now()
+    
+    filepath.unlink()
     
     resume.save()
         

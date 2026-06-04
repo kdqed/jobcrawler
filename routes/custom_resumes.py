@@ -14,7 +14,7 @@ def handler():
             cr_generated_at__neq = None,
         ))
     ]).only(
-        'id', 'title', 'org_logo', 'org_name', 'loc_locality', 'date_posted'
+        'id', 'title', 'org_logo', 'org_name', 'loc_locality', 'date_posted', 'src'
     )[:50]
 
     return wrap(render_template('custom_resumes.html', 
