@@ -34,4 +34,5 @@ class Default(metaclass=_Client):
 client_map = {
     'localhost:4071': Default,
     'xwstg.kdqed.com': Default,
+    'xerowork.com': Default,
 }
